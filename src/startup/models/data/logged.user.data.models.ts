@@ -15,11 +15,11 @@ export class LoggedUser extends User {
     processSession = async (): Promise<void> => {
         try {
             const sessionService = new SessionService();
-            const isSessionValid = sessionService.checkSession(this.userId, this.sessionId);
+            const isSessionValid = sessionService.validateSession(this.userId, this.sessionId);
             if (!isSessionValid) {
                 throw new Error();
             }
-            const getSessionData = sessionService.
+            const getSessionData = sessionService.getSessionData(this.sessionId);
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }

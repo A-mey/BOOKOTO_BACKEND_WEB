@@ -1,5 +1,6 @@
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models"
+import { SessionService } from '../../../common/services/session/session.service';
 
 export class AnonymousUser extends User {
 
@@ -12,7 +13,8 @@ export class AnonymousUser extends User {
 
     processSession = async (): Promise<void> => {
         try {
-            const 
+            const sessionService = new SessionService();
+            const sessionData = sessionService.getSessionData;
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }
