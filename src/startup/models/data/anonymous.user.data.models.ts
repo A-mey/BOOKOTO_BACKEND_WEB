@@ -1,8 +1,9 @@
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models"
 import { SessionService } from '../../../common/services/session/session.service';
+import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
 
-export class AnonymousUser extends User {
+export class AnonymousUser extends User implements IuserInterface{
 
     private sessionId: string;
 

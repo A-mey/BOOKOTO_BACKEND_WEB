@@ -1,6 +1,4 @@
-import express, { NextFunction, Request } from "express";
-import LoginSchema from "../../login/schema/login.schema";
-// import validateSchemaServices from "../../common/services/validateSchema.services";
+import express, { NextFunction } from "express";
 import ValidateSchema from "../services/schema/validate.schema"
 import compileSchema from "../services/schema/compile.schema";
 import { CommonSchemaValidator } from "../interfaces/schemaValidation.interface";
@@ -9,15 +7,15 @@ import { errorMessageObject } from '../types/errorMsgObject.types';
 
 export class BodyValidationMiddleware implements CommonSchemaValidator{
 
-    private schema: any;
+    private schema: object;
 
-    constructor(schema: any) {
+    constructor(schema: object) {
         this.schema = schema;
     }
     
-    checkSchema = async (req: Request, res: express.Response, next: NextFunction) => {
-        const origin: (keyof typeof LoginSchema.schema) = req.originalUrl.replace("/", "") as (keyof typeof LoginSchema.schema);
-        const schema = LoginSchema.schema[origin];
+    checkSchema = async (req: express.Request, res: express.Response, next: NextFunction) => {
+        const origin: (keyof typeof this.schema) = req.originalUrl.replace("/", "") as (keyof typeof this.schema);
+        const schema = this.schema[origin];
         const validateSchemaFn = await compileSchema.compile(schema)
         const errorRes: errorMessageObject =  await ValidateSchema.validateSchema(req.body, validateSchemaFn);
         if (errorRes.isValid) {

@@ -1,8 +1,9 @@
+import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
 import { SessionService } from "../../../common/services/session/session.service";
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models";
 
-export class LoggedUser extends User {
+export class LoggedUser extends User implements IuserInterface{
     private sessionId: string;
     private userId: string;
 

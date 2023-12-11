@@ -1,8 +1,9 @@
+import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
 import { SessionService } from "../../../common/services/session/session.service";
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models";
 
-export class NewUser extends User {
+export class NewUser extends User implements IuserInterface {
     constructor() {
         super();
     }

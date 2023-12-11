@@ -11,7 +11,7 @@ export class SessionValidationMiddleware {
         try {
             const userId = req.header('ID')!;
             const sessionId = req.header('SESSIONID')!;
-            const isSessionValid = await this.sessionService.checkSession(userId, sessionId);
+            const isSessionValid = await this.sessionService.validateSession(userId, sessionId);
             if (isSessionValid) {
                 next();
             } else {
