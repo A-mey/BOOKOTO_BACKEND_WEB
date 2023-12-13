@@ -15,12 +15,14 @@ import { StartupRoutes } from './startup/routes/startup.route.config';
 import debug from 'debug';
 import helmet from 'helmet';
 import httpContext from "express-http-context";
+import { StartupController } from './startup/controllers/startup.controller';
+import { containerService } from './container/main.container';
 
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port = process.env.PORT;
-const routes: Array<CommonRoutesConfig> = [];
+let routes: Array<CommonRoutesConfig> = [];
 // const sqlConnections: Array<SQLService> = [];
 const debugLog: debug.IDebugger = debug('app');
 
@@ -77,8 +79,12 @@ app.use(expressWinston.logger(loggerOptions));
 
 // here we are adding the UserRoutes to our array,
 // after sending the Express.js application object to have the routes added to our app!
-routes.push(new LoginRoutes(app));
-routes.push(new StartupRoutes(app));
+// routes.push(new LoginRoutes(app));
+// routes.push(new StartupRoutes(app, new StartupController()));
+
+routes = containerService(routes, app);
+
+
 
 app.use(expressWinston.errorLogger({
     transports: [

@@ -1,14 +1,15 @@
 import responseTemplateConstants from "../../common/constants/response.template.constants";
+import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
 import { catchError } from "../../common/utils/catch.util";
-import { StartupService } from "../services/startup.service";
 import Request from 'express';
 import express, { Response } from 'express';
+import { IStartupServices } from "../interfaces/Istartup.services.interface";
 
-export class StartupController {
-    startupService: StartupService;
+export class StartupController implements IStartupControllerInterface {
+    startupService: IStartupServices;
     
-    constructor() {
-        this.startupService = new StartupService();
+    constructor(startupService: IStartupServices) {
+        this.startupService = startupService;
      }
 
     manageSession = async (req: express.Request, res: express.Response) => {

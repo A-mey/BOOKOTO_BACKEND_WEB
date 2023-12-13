@@ -4,18 +4,19 @@ import idMiddleware from "../../common/middleware/id.middleware";
 import { BodyValidationMiddleware } from '../../common/middleware/body.validation.middleware';
 import StartupSchema from '../schema/startup.schema'
 import { StartupController } from '../controllers/startup.controller';
+import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
 
 
 export class StartupRoutes implements CommonRoutesConfig {
-    private bodyValidationMiddleware: BodyValidationMiddleware;
+    bodyValidationMiddleware: BodyValidationMiddleware;
     app: express.Application;
     private name = "StartupRoutes";
-    startupController: StartupController;
+    startupController: IStartupControllerInterface;
     
-    constructor(app: express.Application) {
+    constructor(app: express.Application, startupController: IStartupControllerInterface) {
         this.app = app;
         this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
-        this.startupController = new StartupController();
+        this.startupController = startupController;
     }
 
     configureRoutes() {

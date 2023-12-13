@@ -1,6 +1,6 @@
-import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
+import { IUserInterface } from "../../interfaces/IUser.interface";
 
-export abstract class User implements IuserInterface{
+export abstract class User implements IUserInterface{
 
-    abstract processSession (): Promise<void>
+    abstract processSession (): Promise<any>
 }

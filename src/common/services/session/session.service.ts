@@ -11,7 +11,7 @@ export class SessionService {
         }
     }
 
-    createSession = async () : Promise<any> => {
+    createSession = async () : Promise<{SESSION_ID: string}> => {
         try {
             return {SESSION_ID: "12345"}
         } catch (error: unknown) {
@@ -19,9 +19,9 @@ export class SessionService {
         }
     }
 
-    getSessionData = async (sessionId: string) : Promise<any> => {
+    getSessionData = async (sessionId: string) : Promise<{SESSION_ID: string; data: Object}> => {
         try {
-            return {SESSIONID: "12345", data: {}}
+            return {SESSION_ID: "12345", data: {}}
         } catch (error: unknown) {
             throw new Error(await catchError(error)); 
         }

@@ -1,9 +1,9 @@
-import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
+import { IUserInterface } from "../../interfaces/IUser.interface";
 import { SessionService } from "../../../common/services/session/session.service";
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models";
 
-export class LoggedUser extends User implements IuserInterface{
+export class LoggedUser extends User implements IUserInterface{
     private sessionId: string;
     private userId: string;
 
@@ -13,7 +13,7 @@ export class LoggedUser extends User implements IuserInterface{
         this.userId = userId;
     }
 
-    processSession = async (): Promise<void> => {
+    processSession = async (): Promise<{SESSION_ID: string;data: Object;}> => {
         try {
             const sessionService = new SessionService();
             const isSessionValid = sessionService.validateSession(this.userId, this.sessionId);
@@ -21,6 +21,7 @@ export class LoggedUser extends User implements IuserInterface{
                 throw new Error();
             }
             const getSessionData = sessionService.getSessionData(this.sessionId);
+            return getSessionData;
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }

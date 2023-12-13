@@ -1,9 +1,9 @@
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models"
 import { SessionService } from '../../../common/services/session/session.service';
-import { IuserInterface } from "../../../common/interfaces/Iuser.interface";
+import { IUserInterface } from "../../interfaces/IUser.interface";
 
-export class AnonymousUser extends User implements IuserInterface{
+export class AnonymousUser extends User implements IUserInterface{
 
     private sessionId: string;
 
@@ -12,10 +12,11 @@ export class AnonymousUser extends User implements IuserInterface{
         this.sessionId = sessionId;
     }
 
-    processSession = async (): Promise<void> => {
+    processSession = async (): Promise<{SESSION_ID: string; data: Object;}> => {
         try {
             const sessionService = new SessionService();
-            const sessionData = sessionService.getSessionData;
+            const sessionData = sessionService.getSessionData(this.sessionId);
+            return sessionData;
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }
