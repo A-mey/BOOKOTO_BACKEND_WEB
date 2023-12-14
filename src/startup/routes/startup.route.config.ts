@@ -1,9 +1,8 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
-import express from 'express';
+import express from "express";
 import idMiddleware from "../../common/middleware/id.middleware";
-import { BodyValidationMiddleware } from '../../common/middleware/body.validation.middleware';
-import StartupSchema from '../schema/startup.schema'
-import { StartupController } from '../controllers/startup.controller';
+import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
+import StartupSchema from "../schema/startup.schema";
 import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
 
 
@@ -25,7 +24,7 @@ export class StartupRoutes implements CommonRoutesConfig {
 
         // this.app.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route('/startApp')
+        this.app.route("/startApp")
             .get(
                 this.startupController.manageSession
             );

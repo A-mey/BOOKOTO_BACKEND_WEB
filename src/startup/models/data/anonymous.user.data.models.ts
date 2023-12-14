@@ -1,6 +1,6 @@
 import { catchError } from "../../../common/utils/catch.util";
-import { User } from "./user.data.models"
-import { SessionService } from '../../../common/services/session/session.service';
+import { User } from "./user.data.models";
+import { SessionService } from "../../../common/services/session/session.service";
 import { IUserInterface } from "../../interfaces/IUser.interface";
 
 export class AnonymousUser extends User implements IUserInterface{
@@ -12,7 +12,7 @@ export class AnonymousUser extends User implements IUserInterface{
         this.sessionId = sessionId;
     }
 
-    processSession = async (): Promise<{SESSION_ID: string; data: Object;}> => {
+    processSession = async (): Promise<{SESSION_ID: string; data: object;}> => {
         try {
             const sessionService = new SessionService();
             const sessionData = sessionService.getSessionData(this.sessionId);
@@ -20,5 +20,5 @@ export class AnonymousUser extends User implements IUserInterface{
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }
-    }
+    };
 }

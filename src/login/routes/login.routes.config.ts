@@ -1,10 +1,10 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
-import LoginController from '../controllers/login.controller';
-import LoginMiddleware from '../middleware/login.middleware';
-import { BodyValidationMiddleware } from '../../common/middleware/body.validation.middleware';
+import LoginController from "../controllers/login.controller";
+import LoginMiddleware from "../middleware/login.middleware";
+import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
 import idMiddleware from "../../common/middleware/id.middleware";
-import express from 'express';
-import StartupSchema from '../schema/login.schema';
+import express from "express";
+import StartupSchema from "../schema/login.schema";
 
 
 export class LoginRoutes implements CommonRoutesConfig {
@@ -23,26 +23,26 @@ export class LoginRoutes implements CommonRoutesConfig {
 
         this.app.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route(`/createOTP`)
+        this.app.route("/createOTP")
             .post(
                 LoginMiddleware.checkWhetherUserDoesNotAlreadyExist,
                 LoginController.sendOTP
             );
-        this.app.route('/validateOTP')
+        this.app.route("/validateOTP")
             .post(
                 LoginController.validateOTP
             );
-        this.app.route('/registerUser')
+        this.app.route("/registerUser")
             .post(
                 LoginController.createUser
-            )
-        this.app.route('/loginUser')
+            );
+        this.app.route("/loginUser")
             .post(
                 LoginMiddleware.checkWhetherUserExists,
                 LoginMiddleware.authenticateLoginData,
                 LoginMiddleware.validatePassword,
                 LoginController.returnUserData
-            )
+            );
         return this.app;
     }
 

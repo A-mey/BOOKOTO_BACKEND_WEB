@@ -11,4 +11,4 @@ export const containerService = (routes: Array<CommonRoutesConfig>, app: express
     routes.push(loginRoutes);
     
     return routes;
-}
+};

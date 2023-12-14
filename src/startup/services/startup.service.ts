@@ -1,7 +1,7 @@
 import { SessionService } from "../../common/services/session/session.service";
 import { catchError } from "../../common/utils/catch.util";
 import { User } from "../models/data/user.data.models";
-import { UserFactory } from "../models/factories/user.factory.models"
+import { UserFactory } from "../models/factories/user.factory.models";
 
 export class StartupService {
     
@@ -18,11 +18,11 @@ export class StartupService {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);
         }
-    }
+    };
 
-    processSession = async (user: User) => {
+    processSession = async (user: User) : Promise<{ SESSION_ID: string; data: object; } | { SESSION_ID: string; }>=> {
         return user.processSession();
-    }
+    };
 
     createSession = async () => {
         try {
@@ -31,5 +31,5 @@ export class StartupService {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);
         }
-    }
+    };
 }

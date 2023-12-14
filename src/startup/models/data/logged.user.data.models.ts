@@ -13,7 +13,7 @@ export class LoggedUser extends User implements IUserInterface{
         this.userId = userId;
     }
 
-    processSession = async (): Promise<{SESSION_ID: string;data: Object;}> => {
+    processSession = async (): Promise<{SESSION_ID: string;data: object;}> => {
         try {
             const sessionService = new SessionService();
             const isSessionValid = sessionService.validateSession(this.userId, this.sessionId);
@@ -25,5 +25,5 @@ export class LoggedUser extends User implements IUserInterface{
         } catch (error: unknown) {
             throw new Error(await catchError(error));
         }
-    }
+    };
 }

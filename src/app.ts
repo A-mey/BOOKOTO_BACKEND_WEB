@@ -1,22 +1,19 @@
-import express from 'express';
-import * as http from 'http';
+import express from "express";
+import * as http from "http";
 import * as dotenv from "dotenv";
-const dotenvResult = dotenv.config({ path: `.env.${process.env.DEPLOY_STAGE}` })
+const dotenvResult = dotenv.config({ path: `.env.${process.env.DEPLOY_STAGE}` });
 if (dotenvResult.error) {
     throw dotenvResult.error;
 }
-import * as winston from 'winston';
-import * as expressWinston from 'express-winston';
-import cors from 'cors';
-import { CommonRoutesConfig } from './common/common.routes.config';
-import { LoginRoutes } from './login/routes/login.routes.config';
-import { StartupRoutes } from './startup/routes/startup.route.config';
+import * as winston from "winston";
+import * as expressWinston from "express-winston";
+import cors from "cors";
+import { CommonRoutesConfig } from "./common/common.routes.config";
 
-import debug from 'debug';
-import helmet from 'helmet';
+// import debug from "debug";
+import helmet from "helmet";
 import httpContext from "express-http-context";
-import { StartupController } from './startup/controllers/startup.controller';
-import { containerService } from './container/main.container';
+import { containerService } from "./container/main.container";
 
 
 const app: express.Application = express();
@@ -24,7 +21,7 @@ const server: http.Server = http.createServer(app);
 const port = process.env.PORT;
 let routes: Array<CommonRoutesConfig> = [];
 // const sqlConnections: Array<SQLService> = [];
-const debugLog: debug.IDebugger = debug('app');
+// const debugLog: debug.IDebugger = debug("app");
 
 // here we are adding middleware to parse all incoming requests as JSON 
 app.use(express.json());
@@ -51,16 +48,16 @@ const loggerOptions: expressWinston.LoggerOptions = {
         new winston.transports.File({
             // level: 'error',
             // Create the log directory if it does not exist
-            filename: 'Documents/Bookoto/logs/example.log'
+            filename: "Logs/backend.log"
         })],
     format: winston.format.combine(
         // winston.format.json(),
         winston.format.label({
-            label: `Label🏷️`
+            label: "Label🏷️"
         }),
         winston.format.timestamp({
-           format: 'MMM-DD-YYYY HH:mm:ss'
-       }),
+            format: "MMM-DD-YYYY HH:mm:ss"
+        }),
         winston.format.printf(info => `${info.level}: ${info.label}: ${[info.timestamp]}: ${info.message}`),
         winston.format.prettyPrint(),
         winston.format.colorize({ all: true })
@@ -69,37 +66,30 @@ const loggerOptions: expressWinston.LoggerOptions = {
 
 if (!process.env.DEBUG) {
     loggerOptions.meta = false; // when not debugging, log requests as one-liners
-    if (typeof global.it === 'function') {
-        loggerOptions.level = 'http'; // for non-debug test runs, squelch entirely
+    if (typeof global.it === "function") {
+        loggerOptions.level = "http"; // for non-debug test runs, squelch entirely
     }
 }
 
 // initialize the logger with the above configuration
 app.use(expressWinston.logger(loggerOptions));
 
-// here we are adding the UserRoutes to our array,
-// after sending the Express.js application object to have the routes added to our app!
-// routes.push(new LoginRoutes(app));
-// routes.push(new StartupRoutes(app, new StartupController()));
-
 routes = containerService(routes, app);
-
-
 
 app.use(expressWinston.errorLogger({
     transports: [
-      new winston.transports.Console()
+        new winston.transports.Console()
     ],
     format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.json()
+        winston.format.colorize(),
+        winston.format.json()
     )
 }));
 
 // this is a simple route to make sure everything is working properly
 const runningMessage = `Server running at http://localhost:${port}`;
-app.get('/', (_req: express.Request, res: express.Response) => {
-    res.status(200).send(runningMessage)
+app.get("/", (_req: express.Request, res: express.Response) => {
+    res.status(200).send(runningMessage);
 });
 
 app.use(helmet());
@@ -108,11 +98,7 @@ server.listen(port, () => {
     routes.forEach((route: CommonRoutesConfig) => {
         console.log(`Routes configured for ${route.getName()}`);
     });
-    // our only exception to avoiding console.log(), because we
-    // always want to know when the server is done starting up
     console.log(runningMessage);
-    // let usersRoutes:any = new UsersRoutes(app);
-
 });
 
 export {app, server};
