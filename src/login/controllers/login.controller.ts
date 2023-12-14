@@ -1,23 +1,22 @@
-import express from 'express';
+import express from "express";
 
-import { LoginService } from '../services/login.service';
-
-import { CreateUserDTO } from '../dto/create.user.dto';
-import { OtpObject } from '../../common/types/otpObject.types';
-import { response } from '../../common/types/response.types';
-import { getUserDTO } from '../dto/get.user.dto';
-import { createUserInput } from '../types/create.user.input.type';
-import { catchError } from '../../common/utils/catch.util';
-import responseTemplates from '../../common/constants/response.template.constants';
-import { LogService } from '../../common/services/logger/log.service'
-import logFactoryService from '../../common/services/logger/log.factory.service';
+import { CreateUserDTO } from "../dto/create.user.dto";
+import { OtpObject } from "../../common/types/otpObject.types";
+import { response } from "../../common/types/response.types";
+import { getUserDTO } from "../dto/get.user.dto";
+import { createUserInput } from "../types/create.user.input.type";
+import { catchError } from "../../common/utils/catch.util";
+import responseTemplates from "../../common/constants/response.template.constants";
+import { LogService } from "../../common/services/logger/log.service";
+import logFactoryService from "../../common/services/logger/log.factory.service";
+import { ILoginService } from "../interfaces/ILogin.service.interface";
 // const log: debug.IDebugger = debug('app:users-controller');
 
-class LoginController {
+export class LoginController {
     logger: LogService;
-    private loginService: LoginService
+    private loginService: ILoginService;
 
-    constructor(loginService: LoginService) {
+    constructor(loginService: ILoginService) {
         this.loginService = loginService;
         this.logger = new LogService("LoginController");
     }
@@ -38,13 +37,13 @@ class LoginController {
             logger.log("error", await catchError(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
-    }
+    };
 
     validateOTP = async (req: express.Request, res: express.Response) => {
         const logger = await logFactoryService.getLog(this.logger, "validateOTP");
         let responseData: response = responseTemplates.DEFAULT_ERROR;
         try {
-            const isOtpValid = await this.loginService.checkWhetherOtpIsValid(req.body.EMAILID, req.body.HASH, req.body.OTP)
+            const isOtpValid = await this.loginService.checkWhetherOtpIsValid(req.body.EMAILID, req.body.HASH, req.body.OTP);
             responseData = isOtpValid === true ? responseTemplates.OTP_MATCHED_SUCCESS : responseTemplates.OTP_MATCHED_FAILURE;
             res.status(responseData.code).json(responseData);
         } catch (error: unknown) {
@@ -52,7 +51,7 @@ class LoginController {
             logger.log("error", errorMsg);
         }
         res.status(responseData.code).json(responseData);
-    }
+    };
 
     createUser = async (req: express.Request, res: express.Response) => {
         const logger = await logFactoryService.getLog(this.logger, "createUser");
@@ -68,7 +67,7 @@ class LoginController {
             console.log(await catchError(error));
         }
         res.status(responseData.code).json(responseData);
-    }
+    };
 
     returnUserData = async (req: express.Request, res: express.Response) => {
         const logger = await logFactoryService.getLog(this.logger, "returnUserData");
@@ -84,7 +83,5 @@ class LoginController {
             logger.log("error", await catchError(error));
         }
         res.status(responseData.code).json(responseData);   
-    }
+    };
 }
-
-export default new LoginController(new LoginService());

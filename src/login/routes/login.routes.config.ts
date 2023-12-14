@@ -1,20 +1,22 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
-import LoginController from "../controllers/login.controller";
 import LoginMiddleware from "../middleware/login.middleware";
 import express from "express";
 import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
 import { IBodyValidationMiddlewareInterface } from "../../common/interfaces/IBody.validation.middleware";
+import { LoginController } from "../controllers/login.controller";
 
 export class LoginRoutes implements CommonRoutesConfig {
     private bodyValidationMiddleware: IBodyValidationMiddlewareInterface;
     app: express.Application;
     private name = "LoginRoutes";
     idMiddleware: IIdMiddleWareInterface;
+    loginController: LoginController;
     
-    constructor(app: express.Application, idMiddleware: IIdMiddleWareInterface, bodyValidationMiddleware: IBodyValidationMiddlewareInterface) {
+    constructor(app: express.Application, idMiddleware: IIdMiddleWareInterface, bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: LoginController) {
         this.app = app;
         this.bodyValidationMiddleware = bodyValidationMiddleware;
         this.idMiddleware = idMiddleware;
+        this.loginController = loginController;
     }
     
     configureRoutes() {
@@ -26,22 +28,22 @@ export class LoginRoutes implements CommonRoutesConfig {
         this.app.route("/createOTP")
             .post(
                 LoginMiddleware.checkWhetherUserDoesNotAlreadyExist,
-                LoginController.sendOTP
+                this.loginController.sendOTP
             );
         this.app.route("/validateOTP")
             .post(
-                LoginController.validateOTP
+                this.loginController.validateOTP
             );
         this.app.route("/registerUser")
             .post(
-                LoginController.createUser
+                this.loginController.createUser
             );
         this.app.route("/loginUser")
             .post(
                 LoginMiddleware.checkWhetherUserExists,
                 LoginMiddleware.authenticateLoginData,
                 LoginMiddleware.validatePassword,
-                LoginController.returnUserData
+                this.loginController.returnUserData
             );
         return this.app;
     }

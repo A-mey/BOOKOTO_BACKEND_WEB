@@ -1,24 +1,24 @@
-import { OtpService } from '../../common/services/otp.services'
-import { EncryptionService } from '../../common/services/encryption.services';
-import { Pill } from '../types/pill.type'
-import { OtpObject } from '../../common/types/otpObject.types';
-import { encryptionData } from '../types/encryptionData.type';
-import { CreateUserDTO } from '../dto/create.user.dto';
-import { User } from '../types/user.type';
-import { createUserInput } from '../types/create.user.input.type';
-import { NullException } from '../../common/error/exceptions/null.exception.error';
-import { LoginDao } from '../dao/login.dao';
-import { getUserDTO } from '../dto/get.user.dto';
-import { catchError } from '../../common/utils/catch.util';
-import { validateUserDTO } from '../dto/validate.user.dto';
-import { LogService } from '../../common/services/logger/log.service';
-import logFactoryService from '../../common/services/logger/log.factory.service';
-import { response } from '../../common/types/response.types';
+import { OtpService } from "../../common/services/otp.services";
+import { EncryptionService } from "../../common/services/encryption.services";
+import { Pill } from "../types/pill.type";
+import { OtpObject } from "../../common/types/otpObject.types";
+import { encryptionData } from "../types/encryptionData.type";
+import { CreateUserDTO } from "../dto/create.user.dto";
+import { User } from "../types/user.type";
+import { createUserInput } from "../types/create.user.input.type";
+import { NullException } from "../../common/error/exceptions/null.exception.error";
+import { LoginDao } from "../dao/login.dao";
+import { getUserDTO } from "../dto/get.user.dto";
+import { catchError } from "../../common/utils/catch.util";
+import { validateUserDTO } from "../dto/validate.user.dto";
+import { LogService } from "../../common/services/logger/log.service";
+import logFactoryService from "../../common/services/logger/log.factory.service";
+import { response } from "../../common/types/response.types";
 
 export class LoginService {
     otpService: OtpService;
     loginDao: LoginDao;
-    encryptionService: EncryptionService
+    encryptionService: EncryptionService;
     logger: LogService;
 
     constructor() {
@@ -28,7 +28,7 @@ export class LoginService {
         this.logger = new LogService("LoginController");
     }
 
-    private secretKey = process.env.SECRETKEY!
+    private secretKey = process.env.SECRETKEY!;
 
     authenticateUserData = async (userAuthCheck: validateUserDTO): Promise<response> => {
         const logger = await logFactoryService.getLog(this.logger, "authenticateUserData");
@@ -41,7 +41,7 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
-    }
+    };
 
     getUserDetails = async (emailObject: getUserDTO): Promise<response> => {
         const logger = await logFactoryService.getLog(this.logger, "getUserDetails");
@@ -54,7 +54,7 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
-    }
+    };
 
     createNewUser = async (createUserData: CreateUserDTO): Promise<response> => {
         const logger = await logFactoryService.getLog(this.logger, "createNewUser");
@@ -67,7 +67,7 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         } 
-    }
+    };
 
     getOtpObject = async (emailId: string) : Promise<OtpObject> => {
         const logger = await logFactoryService.getLog(this.logger, "getOtpObject");
@@ -79,9 +79,9 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         } 
-    }
+    };
 
-    sendOtpViaMail = async (emailId: string, otp: string) => {
+    sendOtpViaMail = async (emailId: string, otp: string) : Promise<void> => {
         const logger = await logFactoryService.getLog(this.logger, "sendOtpViaMail");
         try {
             await this.otpService.sendOtpMail(emailId, otp!);
@@ -90,9 +90,9 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         } 
-    }
+    };
     
-    checkWhetherOtpIsValid = async (emailId: string, hash: string, otp: string) => {
+    checkWhetherOtpIsValid = async (emailId: string, hash: string, otp: string) : Promise<boolean> => {
         const logger = await logFactoryService.getLog(this.logger, "checkWhetherOtpIsValid");
         try {
             const isOtpValid = await this.otpService.verifyOTP(emailId, hash, otp);
@@ -102,7 +102,7 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         } 
-    }
+    };
 
     createAuthPill = async (emailId: string, password: string): Promise<Pill> => {
         const logger = await logFactoryService.getLog(this.logger, "createAuthPill");
@@ -118,7 +118,7 @@ export class LoginService {
             const data = {
                 AUTHPILL: authPill,
                 USERNAMEHASH: usernameHash
-            }
+            };
             return data;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -126,7 +126,7 @@ export class LoginService {
             throw new Error(errorMsg);
         } 
         
-    }
+    };
 
     createUserAuth = async (emailId: string, password: string): Promise<encryptionData> => {
         const logger = await logFactoryService.getLog(this.logger, "authenticateUserData");
@@ -149,9 +149,9 @@ export class LoginService {
             throw new Error(errorMsg);
         } 
         
-    }
+    };
 
-    decryptAuthPill = async (pill: string, key: string, customSalt: string) => {
+    decryptAuthPill = async (pill: string, key: string, customSalt: string) : Promise<string> => {
         const logger = await logFactoryService.getLog(this.logger, "decryptAuthPill");
         try {
             const encryptedData = pill.substring(customSalt.length, pill.length);
@@ -163,7 +163,7 @@ export class LoginService {
             throw new Error(errorMsg);
         } 
         
-    }
+    };
 
     createUserData = async (createUserInput: createUserInput) : Promise<CreateUserDTO> => {
         const logger = await logFactoryService.getLog(this.logger, "createUserData");
@@ -171,7 +171,7 @@ export class LoginService {
             const emailId = createUserInput.EMAILID;
             const password = createUserInput.PASSWORD;
             const encryptedPill: Pill = await this.createAuthPill(emailId, password);
-            const userData: User = {TITLE: createUserInput.TITLE, EMAILID: createUserInput.EMAILID, FIRSTNAME: createUserInput.FIRSTNAME, LASTNAME: createUserInput.LASTNAME, GENDER: createUserInput.GENDER, DOB: createUserInput.DOB}
+            const userData: User = {TITLE: createUserInput.TITLE, EMAILID: createUserInput.EMAILID, FIRSTNAME: createUserInput.FIRSTNAME, LASTNAME: createUserInput.LASTNAME, GENDER: createUserInput.GENDER, DOB: createUserInput.DOB};
             const createUserData: CreateUserDTO = {USER: userData, AUTH: encryptedPill};
             return createUserData;
         } catch (error: unknown) {
@@ -179,7 +179,7 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
-    }
+    };
 
     getOldPassword = async (encryptionData: encryptionData) : Promise<string> => {
         const logger = await logFactoryService.getLog(this.logger, "getOldPassword");
@@ -195,9 +195,9 @@ export class LoginService {
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }   
-    }
+    };
 
-    checkWhetherUserExists = async (emailId: string) => {
+    checkWhetherUserExists = async (emailId: string) : Promise<boolean> => {
         const logger = await logFactoryService.getLog(this.logger, "checkWhetherUserExists");
         try {
             let proceed = false;
@@ -213,5 +213,5 @@ export class LoginService {
             throw new Error(errorMsg);
         } 
         
-    }
+    };
 }
