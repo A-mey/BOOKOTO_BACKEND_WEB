@@ -1,25 +1,25 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
 import LoginController from "../controllers/login.controller";
 import LoginMiddleware from "../middleware/login.middleware";
-import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
-import idMiddleware from "../../common/middleware/id.middleware";
 import express from "express";
-import StartupSchema from "../schema/login.schema";
-
+import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
+import { IBodyValidationMiddlewareInterface } from "../../common/interfaces/IBody.validation.middleware";
 
 export class LoginRoutes implements CommonRoutesConfig {
-    private bodyValidationMiddleware: BodyValidationMiddleware;
+    private bodyValidationMiddleware: IBodyValidationMiddlewareInterface;
     app: express.Application;
     private name = "LoginRoutes";
+    idMiddleware: IIdMiddleWareInterface;
     
-    constructor(app: express.Application) {
-        // super(app, 'UserRoutes');
+    constructor(app: express.Application, idMiddleware: IIdMiddleWareInterface, bodyValidationMiddleware: IBodyValidationMiddlewareInterface) {
         this.app = app;
-        this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
+        this.bodyValidationMiddleware = bodyValidationMiddleware;
+        this.idMiddleware = idMiddleware;
     }
+    
     configureRoutes() {
 
-        this.app.use(idMiddleware.createRequestId);
+        this.app.use(this.idMiddleware.createRequestId);
 
         this.app.use(this.bodyValidationMiddleware.checkSchema);
 

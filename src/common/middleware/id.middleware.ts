@@ -1,25 +1,23 @@
-import { Request, Response, NextFunction } from "express";
+import express, { NextFunction } from "express";
 import { catchError } from "../utils/catch.util";
-import { RequestIdService } from '../services/requestId/requestId.service';
+import { RequestIdService } from "../services/requestId/requestId.service";
+import { IIdMiddleWareInterface } from "../interfaces/IId.middlewar.interface";
 
-class IdMiddleware {
+export class IdMiddleware implements IIdMiddleWareInterface{
     private requestIdService: RequestIdService;
 
     constructor() {
         this.requestIdService = new RequestIdService();
     }
 
-    createRequestId = async(req: Request, _res: Response, next: NextFunction) => {
+    createRequestId = async(req: express.Request, _res: express.Response, next: NextFunction) => {
         try {
-            const sessionId = req.header("SESSIONID")!;
+            const sessionId = req.header("SESSIONID") || "11111111";
             await this.requestIdService.setRequestId(sessionId);
             next();
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            console.log("IdClass:createRequestId::error", errorMsg)
-        }
-        
-    }
+            console.log("IdClass:createRequestId::error", errorMsg);
+        }  
+    };
 }
-
-export default new IdMiddleware();

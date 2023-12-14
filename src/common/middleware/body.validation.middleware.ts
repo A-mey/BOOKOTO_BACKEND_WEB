@@ -1,11 +1,11 @@
 import express, { NextFunction } from "express";
-import ValidateSchema from "../services/schema/validate.schema"
+import ValidateSchema from "../services/schema/validate.schema";
 import compileSchema from "../services/schema/compile.schema";
-import { CommonSchemaValidator } from "../interfaces/schemaValidation.interface";
-import { response } from '../types/response.types';
-import { errorMessageObject } from '../types/errorMsgObject.types';
+import { response } from "../types/response.types";
+import { errorMessageObject } from "../types/errorMsgObject.types";
+import { IBodyValidationMiddlewareInterface } from "../interfaces/IBody.validation.middleware";
 
-export class BodyValidationMiddleware implements CommonSchemaValidator{
+export class BodyValidationMiddleware implements IBodyValidationMiddlewareInterface{
 
     private schema: object;
 
@@ -16,13 +16,13 @@ export class BodyValidationMiddleware implements CommonSchemaValidator{
     checkSchema = async (req: express.Request, res: express.Response, next: NextFunction) => {
         const origin: (keyof typeof this.schema) = req.originalUrl.replace("/", "") as (keyof typeof this.schema);
         const schema = this.schema[origin];
-        const validateSchemaFn = await compileSchema.compile(schema)
+        const validateSchemaFn = await compileSchema.compile(schema);
         const errorRes: errorMessageObject =  await ValidateSchema.validateSchema(req.body, validateSchemaFn);
         if (errorRes.isValid) {
             next();
         } else {
-            const response: response = {success: false, code: 400, data: {message: errorRes.errorMsg}}
+            const response: response = {success: false, code: 400, data: {message: errorRes.errorMsg}};
             res.status(400).json(response);
         }
-    }
+    };
 }

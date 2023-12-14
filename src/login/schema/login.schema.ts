@@ -82,7 +82,7 @@ class LoginSchema {
                 }
             },
         }
-    }
+    };
 }
 
 export default new LoginSchema();

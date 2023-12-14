@@ -81,7 +81,7 @@ class StartupSchema {
                 }
             },
         }
-    }
+    };
 }
 
 export default new StartupSchema();

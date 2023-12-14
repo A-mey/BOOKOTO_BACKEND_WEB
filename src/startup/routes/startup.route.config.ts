@@ -1,9 +1,9 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
 import express from "express";
-import idMiddleware from "../../common/middleware/id.middleware";
 import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
 import StartupSchema from "../schema/startup.schema";
 import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
+import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
 
 
 export class StartupRoutes implements CommonRoutesConfig {
@@ -11,16 +11,18 @@ export class StartupRoutes implements CommonRoutesConfig {
     app: express.Application;
     private name = "StartupRoutes";
     startupController: IStartupControllerInterface;
+    idMiddleware: IIdMiddleWareInterface;
     
-    constructor(app: express.Application, startupController: IStartupControllerInterface) {
+    constructor(app: express.Application, startupController: IStartupControllerInterface, idMiddleware: IIdMiddleWareInterface) {
         this.app = app;
         this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
         this.startupController = startupController;
+        this.idMiddleware = idMiddleware;
     }
 
     configureRoutes() {
 
-        this.app.use(idMiddleware.createRequestId);
+        this.app.use(this.idMiddleware.createRequestId);
 
         // this.app.use(this.bodyValidationMiddleware.checkSchema);
 
