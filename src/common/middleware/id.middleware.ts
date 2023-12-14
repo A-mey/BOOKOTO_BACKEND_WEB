@@ -12,7 +12,7 @@ export class IdMiddleware implements IIdMiddleWareInterface{
 
     createRequestId = async(req: express.Request, _res: express.Response, next: NextFunction) => {
         try {
-            const sessionId = req.header("SESSIONID") || "11111111";
+            const sessionId = req.header("SESSIONID") || "011011100110010101110111";
             await this.requestIdService.setRequestId(sessionId);
             next();
         } catch(error: unknown) {
