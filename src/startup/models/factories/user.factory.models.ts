@@ -22,5 +22,5 @@ export class UserFactory {
         } else {
             throw new Error();
         }
-    }
+    };
 }

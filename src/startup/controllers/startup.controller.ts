@@ -15,8 +15,8 @@ export class StartupController implements IStartupControllerInterface {
             const userId = req.header("USERID");
             const sessionId = req.header("SESSIONID");
             const user = await this.startupService.getUser(userId, sessionId);
-            const data = await this.startupService.processSession(user);
-            res.json(data);
+            const sessionDetails = await this.startupService.processSession(user);
+            res.json(sessionDetails);
         } catch (error : unknown) {
             const response = responseTemplateConstants.DEFAULT_ERROR;
             res.status(response.code).json(response);

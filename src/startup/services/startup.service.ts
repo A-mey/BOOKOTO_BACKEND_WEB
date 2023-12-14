@@ -32,4 +32,14 @@ export class StartupService {
             throw new Error(errorMsg);
         }
     };
+
+    getUserdata = async () => {
+        try {
+            // TODO
+            return true;
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        } 
+    };
 }
