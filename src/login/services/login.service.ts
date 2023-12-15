@@ -8,13 +8,17 @@ import { ILoginServiceInterface } from "../interfaces/ILogin.service.interface";
 import { ValidateOtpDTO } from "../dto/validate.otp.dto";
 import { RegisterUserDTO } from "../dto/register.user.dto";
 import { LoginUserDTO } from "../dto/login.user.dto";
+import { ISessionServiceInterface } from "../interfaces/ISession.service.interface";
+import { NullException } from "../../common/error/exceptions/null.exception.error";
 
 export class LoginService implements ILoginServiceInterface {
     loginDao: ILoginDaoInterface;
     logger: LogService;
+    sessionService: ISessionServiceInterface;
 
-    constructor(loginDao: ILoginDaoInterface) {
+    constructor(loginDao: ILoginDaoInterface, sessionService: ISessionServiceInterface) {
         this.loginDao = loginDao;
+        this.sessionService = sessionService;
         this.logger = new LogService("LoginController");
     }
 
@@ -70,4 +74,18 @@ export class LoginService implements ILoginServiceInterface {
         }
     };
 
+    addUserDataToSessionService = async (userData: object) : Promise<void> => {
+        const logger = await logFactoryService.getLog(this.logger, "addUserDataToSessionService");
+        try {
+            if (!userData) {
+                throw new NullException();
+            }
+            const dataToInsert = {USERDATA: userData, SET: "SESSION"};
+            await this.sessionService.addSession(dataToInsert);
+        } catch(error: unknown) {
+            const errorMsg = await catchError(error);
+            logger.log("error", errorMsg);
+            throw new Error(errorMsg);
+        }
+    };
 }

@@ -6,11 +6,13 @@ import loginSchema from "../../login/schema/login.schema";
 import { LoginService } from "../../login/services/login.service";
 import { LoginController } from "../../login/controllers/login.controller";
 import { LoginDao } from "../../login/dao/login.dao";
+import { SessionService } from "../../common/services/session/session.service";
 
 export const loginContainerService = (app: express.Application) => {
     const idMiddleware = new IdMiddleware();
     const loginDao = new LoginDao();
-    const loginService = new LoginService(loginDao);
+    const sessionService = new SessionService();
+    const loginService = new LoginService(loginDao, sessionService);
     const loginController = new LoginController(loginService);
     const bodyValidationMiddleware = new BodyValidationMiddleware(loginSchema.schema);
     const loginRoutes = new LoginRoutes(app, idMiddleware, bodyValidationMiddleware, loginController);

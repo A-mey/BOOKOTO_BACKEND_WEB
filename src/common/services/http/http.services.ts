@@ -1,7 +1,8 @@
+import { IHttpReq } from "../../interfaces/IhttpReq.interface";
 import { catchError } from "../../utils/catch.util";
 import CommonHttpService from "./common.http.service";
 
-class HttpRequestService {
+class HttpRequestService implements IHttpReq {
     async getRequest(url: string): Promise<unknown> {
         try {
             const returnData = await CommonHttpService.httpRequest(url, {}, "get");
