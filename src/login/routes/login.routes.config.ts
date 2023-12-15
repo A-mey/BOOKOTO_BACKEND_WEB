@@ -34,11 +34,11 @@ export class LoginRoutes implements CommonRoutesConfig {
             );
         this.app.route("/registerUser")
             .post(
-                // this.loginController.createUser
+                this.loginController.registerUser
             );
         this.app.route("/loginUser")
             .post(
-                // this.loginController.returnUserData
+                this.loginController.loginUser
             );
         return this.app;
     }
