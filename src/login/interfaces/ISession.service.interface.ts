@@ -1,3 +1,4 @@
+import { AddSessionDTO } from "../../common/session/dto/add.session.dto";
 import { response } from "../../common/types/response.types";
 
 export interface ISessionServiceInterface {
@@ -7,5 +8,5 @@ export interface ISessionServiceInterface {
 
     getSessionData (sessionId: string) : Promise<response>
 
-    addSession (addSessionDto: {USERDATA: object, SET: string}) : Promise<void>
+    addSession (addSessionDto: AddSessionDTO) : Promise<void>
 }

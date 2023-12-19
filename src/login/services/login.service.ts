@@ -74,13 +74,13 @@ export class LoginService implements ILoginServiceInterface {
         }
     };
 
-    addUserDataToSessionService = async (userData: object) : Promise<void> => {
+    addUserDataToSessionService = async (userData: object, sessionId: string) : Promise<void> => {
         const logger = await logFactoryService.getLog(this.logger, "addUserDataToSessionService");
         try {
             if (!userData) {
                 throw new NullException();
             }
-            const dataToInsert = {USERDATA: userData, SET: "SESSION"};
+            const dataToInsert = {SESSION_ID: sessionId, DATA: userData, SET: "SESSION"};
             await this.sessionService.addSession(dataToInsert);
         } catch(error: unknown) {
             const errorMsg = await catchError(error);

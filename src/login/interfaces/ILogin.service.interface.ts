@@ -9,5 +9,5 @@ export interface ILoginServiceInterface {
     validateOTPService (validateOtpDto: ValidateOtpDTO): Promise<response>
     registerUserService (registerUserDTO: RegisterUserDTO) : Promise<response>
     loginUserService (loginUserDTO: LoginUserDTO) : Promise<response>
-    addUserDataToSessionService(userData: object) : Promise<void>
+    addUserDataToSessionService(userData: object, sessionId: string) : Promise<void>
 }

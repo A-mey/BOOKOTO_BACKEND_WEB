@@ -4,7 +4,9 @@ import { LogService } from "../../services/logger/log.service";
 import { response } from "../../types/response.types";
 import { catchError } from "../../utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
-import { ValidateSessionDTO, validateSessionDTO } from '../dto/validate.session.dto';
+import { ValidateSessionDTO } from "../dto/validate.session.dto";
+import { GetSessionDTO } from "../dto/get.session.dto";
+import { AddSessionDTO } from "../dto/add.session.dto";
 
 export class SessionService implements ISessionServiceInterface {
 
@@ -19,7 +21,7 @@ export class SessionService implements ISessionServiceInterface {
     validateSession = async (userId: string, sessionId: string) : Promise<boolean> => {
         const logger = await logFactoryService.getLog(this.logger, "validateSession");
         try {
-            const validateSessionDTO: ValidateSessionDTO = {USER_ID: userId, SESSION_ID: sessionId}
+            const validateSessionDTO: ValidateSessionDTO = {USER_ID: userId, SESSION_ID: sessionId};
             const isSessionValidResponse = await this.sessionDao.validateSessionDao(validateSessionDTO);
             const isSessionValid = isSessionValidResponse.data.data as unknown as boolean;
             return isSessionValid;
@@ -45,7 +47,8 @@ export class SessionService implements ISessionServiceInterface {
     getSessionData = async (sessionId: string) : Promise<response> => {
         const logger = await logFactoryService.getLog(this.logger, "getSessionData");
         try {
-            const sessionData = await this.sessionDao.getSessionDataDao();
+            const getSessionDTO : GetSessionDTO = {SESSION_ID: sessionId}; 
+            const sessionData = await this.sessionDao.getSessionDataDao(getSessionDTO);
             return sessionData;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
@@ -54,10 +57,10 @@ export class SessionService implements ISessionServiceInterface {
         }
     };
 
-    addSession = async (addSessionDto: {USERDATA: object, SET: string}) : Promise<void> => {
+    addSession = async (addSessionDto: AddSessionDTO) : Promise<void> => {
         const logger = await logFactoryService.getLog(this.logger, "addSession");
         try {
-            const response = await this.sessionDao.addSessionDao();
+            const response = await this.sessionDao.addSessionDao(addSessionDto);
             if (response.code != 200) {
                 throw new Error("Something went wrong");
             }

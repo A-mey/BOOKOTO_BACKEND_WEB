@@ -61,10 +61,11 @@ export class LoginController implements ILoginControllerInterface {
         const logger = await logFactoryService.getLog(this.logger, "loginUser");
         try{
             const loginUserDTO = req.body as LoginUserDTO;
+            const sessionId = req.header("SESSION_ID")!;
             const loginResponse: response = await this.loginService.loginUserService(loginUserDTO);
             const userData = loginResponse.data?.data;
             if (userData) {
-                await this.loginService.addUserDataToSessionService(userData);
+                await this.loginService.addUserDataToSessionService(userData, sessionId);
                 res.json(loginResponse);
             } else {
                 res.status(500).json(responseTemplates.DEFAULT_ERROR);
