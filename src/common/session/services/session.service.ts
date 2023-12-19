@@ -1,7 +1,6 @@
 import { ISessionServiceInterface } from "../../../login/interfaces/ISession.service.interface";
 import logFactoryService from "../../services/logger/log.factory.service";
 import { LogService } from "../../services/logger/log.service";
-import { response } from "../../types/response.types";
 import { catchError } from "../../utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
@@ -44,11 +43,12 @@ export class SessionService implements ISessionServiceInterface {
         }
     };
 
-    getSessionData = async (sessionId: string) : Promise<response> => {
+    getSessionData = async (sessionId: string) : Promise<{SESSION_ID: string; DATA: object;}> => {
         const logger = await logFactoryService.getLog(this.logger, "getSessionData");
         try {
             const getSessionDTO : GetSessionDTO = {SESSION_ID: sessionId}; 
-            const sessionData = await this.sessionDao.getSessionDataDao(getSessionDTO);
+            const sessionDataResponse = await this.sessionDao.getSessionDataDao(getSessionDTO);
+            const sessionData = sessionDataResponse.data.data as {SESSION_ID: string; DATA: object;};
             return sessionData;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);

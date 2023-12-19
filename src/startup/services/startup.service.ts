@@ -1,14 +1,14 @@
-import { SessionService } from "../../common/session/services/session.service";
 import { catchError } from "../../common/utils/catch.util";
+import { ISessionServiceInterface } from "../../login/interfaces/ISession.service.interface";
 import { User } from "../models/data/user.data.models";
 import { UserFactory } from "../models/factories/user.factory.models";
 
 export class StartupService {
     
-    sessionService: SessionService;
+    sessionService: ISessionServiceInterface;
 
-    constructor() {
-        this.sessionService = new SessionService();
+    constructor(sessionService: ISessionServiceInterface) {
+        this.sessionService = sessionService;
     }
 
     getUser = async (userId: string | undefined, sessionId: string | undefined) => {
