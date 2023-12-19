@@ -1,4 +1,4 @@
-import { SessionService } from "../../common/services/session/session.service";
+import { SessionService } from "../../common/session/services/session.service";
 import { catchError } from "../../common/utils/catch.util";
 import { User } from "../models/data/user.data.models";
 import { UserFactory } from "../models/factories/user.factory.models";

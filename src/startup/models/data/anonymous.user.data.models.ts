@@ -1,6 +1,6 @@
 import { catchError } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models";
-import { SessionService } from "../../../common/services/session/session.service";
+import { SessionService } from "../../../common/session/services/session.service";
 import { IUserInterface } from "../../interfaces/IUser.interface";
 
 export class AnonymousUser extends User implements IUserInterface{

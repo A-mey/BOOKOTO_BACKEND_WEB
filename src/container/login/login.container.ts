@@ -6,7 +6,7 @@ import loginSchema from "../../login/schema/login.schema";
 import { LoginService } from "../../login/services/login.service";
 import { LoginController } from "../../login/controllers/login.controller";
 import { LoginDao } from "../../login/dao/login.dao";
-import { SessionService } from "../../common/services/session/session.service";
+import { SessionService } from "../../common/session/services/session.service";
 
 export const loginContainerService = (app: express.Application) => {
     const idMiddleware = new IdMiddleware();
