@@ -13,7 +13,7 @@ import { CommonRoutesConfig } from "./common/common.routes.config";
 // import debug from "debug";
 import helmet from "helmet";
 import httpContext from "express-http-context";
-import { containerService } from "./container/main.container";
+import { containerService } from "./container/routes/main.container";
 
 
 const app: express.Application = express();
