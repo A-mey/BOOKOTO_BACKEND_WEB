@@ -24,19 +24,19 @@ export class LoginRoutes implements CommonRoutesConfig {
 
         this.app.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route("/createOTP")
+        this.app.route("/otp/otp")
             .post(
                 this.loginController.createOTP
             );
-        this.app.route("/validateOTP")
+        this.app.route("/otp/verification")
             .post(
                 this.loginController.validateOTP
             );
-        this.app.route("/registerUser")
-            .post(
+        this.app.route("/login/registration")
+            .put(
                 this.loginController.registerUser
             );
-        this.app.route("/loginUser")
+        this.app.route("/login/login")
             .post(
                 this.loginController.loginUser
             );
