@@ -4,7 +4,7 @@ import NotFoundController from "../controllers/404.error.controllers";
 
 
 export class NotFoundRoutes implements CommonRoutesConfig {
-    private name = "StartupRoutes";
+    private name = "NotFoundRoutes";
     app: express.Application;
 
     constructor(app: express.Application) {
