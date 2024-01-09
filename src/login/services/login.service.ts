@@ -1,7 +1,7 @@
 import { catchError } from "../../common/utils/catch.util";
 import { LogService } from "../../common/services/logger/log.service";
 import logFactoryService from "../../common/services/logger/log.factory.service";
-import { response } from "../../common/types/response.types";
+import { Response } from "../../common/types/response.types";
 import { ILoginDaoInterface } from "../interfaces/ILogin.dao.interface";
 import { CreateOtpDTO } from "../dto/create.otp.dto";
 import { ILoginServiceInterface } from "../interfaces/ILogin.service.interface";
@@ -22,7 +22,7 @@ export class LoginService implements ILoginServiceInterface {
         this.logger = new LogService("LoginController");
     }
 
-    createOTPService = async (createOtpDTO : CreateOtpDTO): Promise<response> => {
+    createOTPService = async (createOtpDTO : CreateOtpDTO): Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "createOTPService");
         try {
             const checkAuthResponse = await this.loginDao.createOTPDao(createOtpDTO);
@@ -48,7 +48,7 @@ export class LoginService implements ILoginServiceInterface {
         }
     };
 
-    registerUserService = async (registerUserDTO: RegisterUserDTO) : Promise<response> => {
+    registerUserService = async (registerUserDTO: RegisterUserDTO) : Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "registerUserService");
         try {
             const otpValidationResponse = await this.loginDao.registerUserDao(registerUserDTO);
@@ -61,7 +61,7 @@ export class LoginService implements ILoginServiceInterface {
         }
     };
 
-    loginUserService = async (loginUserDTO: LoginUserDTO) : Promise<response> => {
+    loginUserService = async (loginUserDTO: LoginUserDTO) : Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "registerUserService");
         try {
             const otpValidationResponse = await this.loginDao.loginUserDao(loginUserDTO);

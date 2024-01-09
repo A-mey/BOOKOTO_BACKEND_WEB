@@ -1,5 +1,5 @@
 import HttpRequestService from "../../common/services/http/http.services";
-import { response } from "../../common/types/response.types";
+import { Response } from "../../common/types/response.types";
 import { CreateOtpDTO } from "../dto/create.otp.dto";
 import { NullException } from "../../common/error/exceptions/null.exception.error";
 import { catchError } from "../../common/utils/catch.util";
@@ -18,14 +18,14 @@ export class LoginDao implements ILoginDaoInterface {
         this.logger = new LogService("LoginController");
     }
 
-    createOTPDao = async (createOtpDTO: CreateOtpDTO): Promise<response> => {
+    createOTPDao = async (createOtpDTO: CreateOtpDTO): Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "createOTPDao");
         try {
             const url: string = process.env.getOtpUrl!;
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, createOtpDTO) as response;
+            const getOtpData = await HttpRequestService.postRequest(url, createOtpDTO) as Response;
             return getOtpData;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -34,14 +34,14 @@ export class LoginDao implements ILoginDaoInterface {
         }  
     };
 
-    validateOtpDao = async (validateOtpDto: ValidateOtpDTO) : Promise<response> => {
+    validateOtpDao = async (validateOtpDto: ValidateOtpDTO) : Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "validateOtpDao");
         try {
             const url: string = process.env.getOtpUrl!;
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, validateOtpDto) as response;
+            const getOtpData = await HttpRequestService.postRequest(url, validateOtpDto) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -50,14 +50,14 @@ export class LoginDao implements ILoginDaoInterface {
         }  
     };
 
-    registerUserDao = async (registerUserDTO: RegisterUserDTO) : Promise<response> => {
+    registerUserDao = async (registerUserDTO: RegisterUserDTO) : Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "validateOtpDao");
         try {
             const url: string = process.env.getOtpUrl!;
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, registerUserDTO) as response;
+            const getOtpData = await HttpRequestService.postRequest(url, registerUserDTO) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -66,14 +66,14 @@ export class LoginDao implements ILoginDaoInterface {
         }
     };
 
-    loginUserDao = async (loginUserDTO: LoginUserDTO) : Promise<response> => {
+    loginUserDao = async (loginUserDTO: LoginUserDTO) : Promise<Response> => {
         const logger = await logFactoryService.getLog(this.logger, "validateOtpDao");
         try {
             const url: string = process.env.getOtpUrl!;
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, loginUserDTO) as response;
+            const getOtpData = await HttpRequestService.postRequest(url, loginUserDTO) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);

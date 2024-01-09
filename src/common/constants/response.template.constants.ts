@@ -1,9 +1,9 @@
-import { response } from "../types/response.types";
+import { Response } from "../types/response.types";
 
 class ResponseTemplates {
 
     // Default error
-    DEFAULT_ERROR: response = {code: 500, success: false, data: {message: "Something went wrong"}};
+    DEFAULT_ERROR: Response = {code: 500, success: false, data: {message: "Something went wrong"}};
 
     // Schema validation error
     SCHEMA_VALIDATION_ERROR = {success: true, code: 400, data: {message: ""}};

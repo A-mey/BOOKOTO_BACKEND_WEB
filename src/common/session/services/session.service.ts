@@ -35,7 +35,8 @@ export class SessionService implements ISessionServiceInterface {
         const logger = await logFactoryService.getLog(this.logger, "createSession");
         try {
             const sessionDetails = await this.sessionDao.createSessionDao();
-            return sessionDetails.data.data as unknown as {SESSION_ID: string};
+            const sessionId = sessionDetails.data.data as unknown as {SESSION_ID: string};
+            return sessionId;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
             logger.log("error", errorMsg);

@@ -1,7 +1,7 @@
 import express, { NextFunction } from "express";
 import ValidateSchema from "../services/schema/validate.schema";
 import compileSchema from "../services/schema/compile.schema";
-import { response } from "../types/response.types";
+import { Response } from "../types/response.types";
 import { errorMessageObject } from "../types/errorMsgObject.types";
 import { IBodyValidationMiddlewareInterface } from "../interfaces/IBody.validation.middleware";
 
@@ -21,7 +21,7 @@ export class BodyValidationMiddleware implements IBodyValidationMiddlewareInterf
         if (errorRes.isValid) {
             next();
         } else {
-            const response: response = {success: false, code: 400, data: {message: errorRes.errorMsg}};
+            const response: Response = {success: false, code: 400, data: {message: errorRes.errorMsg}};
             res.status(400).json(response);
         }
     };
