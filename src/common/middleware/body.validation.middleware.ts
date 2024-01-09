@@ -5,7 +5,7 @@ import { response } from "../types/response.types";
 import { errorMessageObject } from "../types/errorMsgObject.types";
 import { IBodyValidationMiddlewareInterface } from "../interfaces/IBody.validation.middleware";
 
-export class BodyValidationMiddleware implements IBodyValidationMiddlewareInterface{
+export class BodyValidationMiddleware implements IBodyValidationMiddlewareInterface {
 
     private schema: object;
 
