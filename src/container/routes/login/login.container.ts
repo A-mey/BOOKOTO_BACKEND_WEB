@@ -8,11 +8,18 @@ import { LoginController } from "../../../login/controllers/login.controller";
 import { LoginDao } from "../../../login/dao/login.dao";
 import { SessionService } from "../../../common/session/services/session.service";
 import { SessionDao } from "../../../common/session/dao/session.dao";
+import { ISessionDaoInterface } from "../../../common/session/interfaces/ISession.dao.interface";
+import { SessionDaoTest } from "../../../test/dao/session.dao.test";
 
 export const loginContainerService = (app: express.Application) => {
     const idMiddleware = new IdMiddleware();
     const loginDao = new LoginDao();
-    const sessionDao = new SessionDao();
+    let sessionDao: ISessionDaoInterface;
+    if (process.env.DEPLOY_STAGE === "qc") {
+        sessionDao = new SessionDaoTest();
+    } else {
+        sessionDao = new SessionDao();
+    }
     const sessionService = new SessionService(sessionDao);
     const loginService = new LoginService(loginDao, sessionService);
     const loginController = new LoginController(loginService);
