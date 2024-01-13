@@ -5,6 +5,7 @@
       "outDir": "./dist",
       "rootDir": "./src", 
       "moduleResolution": "node", 
+      "lib": ["es2021"],
       "forceConsistentCasingInFileNames": true,
       "skipLibCheck": true,
       "strict": true,

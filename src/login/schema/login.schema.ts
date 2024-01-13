@@ -4,7 +4,7 @@ class LoginSchema {
     constructor() { }
 
     public readonly schema = {
-        "createOTP" : {
+        "otpotp" : {
             "type": "object",
             "additionalProperties": false,
             "required": ["EMAILID"],
@@ -16,7 +16,7 @@ class LoginSchema {
             },
         },
 
-        "validateOTP": {
+        "otpverification": {
             "type": "object",
             "additionalProperties": false,
             "required": ["EMAILID", "HASH", "OTP"],
@@ -33,7 +33,7 @@ class LoginSchema {
                 },
             },
         },
-        "registerUser": {
+        "loginregistration": {
             "type": "object",
             "additionalProperties": false,
             "required": ["EMAILID", "PASSWORD", "FIRSTNAME", "GENDER", "DOB"],
@@ -68,7 +68,7 @@ class LoginSchema {
             },
         },
 
-        "loginUser": {
+        "loginlogin": {
             "type": "object",
             "additionalProperties": false,
             "required": ["EMAILID", "PASSWORD"],
