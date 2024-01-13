@@ -7,6 +7,7 @@ export class SessionDaoFactory {
 
     getDao = () : ISessionDaoInterface => {
         let sessionDao: ISessionDaoInterface;
+        console.log("process.env.DEPLOY_STAGE", process.env.DEPLOY_STAGE);
         if (process.env.DEPLOY_STAGE === "qc") {
             sessionDao = new SessionDaoTest();
         } else {

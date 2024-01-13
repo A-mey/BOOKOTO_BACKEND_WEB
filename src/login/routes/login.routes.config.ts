@@ -16,6 +16,7 @@ export class LoginRoutes implements CommonRoutesConfig {
         this.bodyValidationMiddleware = bodyValidationMiddleware;
         this.idMiddleware = idMiddleware;
         this.loginController = loginController;
+        this.configureRoutes();
     }
     
     configureRoutes() {
@@ -24,7 +25,7 @@ export class LoginRoutes implements CommonRoutesConfig {
 
         this.app.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route("/otp/otp")
+        this.app.route("/otp")
             .post(
                 this.loginController.createOTP
             );
@@ -33,7 +34,7 @@ export class LoginRoutes implements CommonRoutesConfig {
                 this.loginController.validateOTP
             );
         this.app.route("/login/registration")
-            .put(
+            .post(
                 this.loginController.registerUser
             );
         this.app.route("/login/login")
