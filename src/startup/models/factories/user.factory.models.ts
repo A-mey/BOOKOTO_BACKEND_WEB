@@ -7,7 +7,7 @@ export class UserFactory {
     userId: string | undefined;
     sessionId: string | undefined;
     
-    constructor(userId: string | undefined, sessionId: string | undefined) {
+    constructor(userId: string, sessionId: string) {
         this.userId = userId;
         this.sessionId = sessionId;
     }

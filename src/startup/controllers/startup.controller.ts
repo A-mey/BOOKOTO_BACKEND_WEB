@@ -14,9 +14,14 @@ export class StartupController implements IStartupControllerInterface {
         try {
             const userId = req.header("USERID");
             const sessionId = req.header("SESSIONID");
-            const user = await this.startupService.getUser(userId, sessionId);
-            const sessionDetails = await this.startupService.processSession(user);
-            res.json(sessionDetails);
+            if (userId !== undefined && sessionId !== undefined) {
+                const user = await this.startupService.getUser(userId, sessionId);
+                const sessionDetails = await this.startupService.processSession(user);
+                res.json(sessionDetails);
+            } else {
+                const response = responseTemplateConstants.DEFAULT_ERROR;
+                res.status(response.code).json(response);
+            }
         } catch (error : unknown) {
             const response = responseTemplateConstants.DEFAULT_ERROR;
             res.status(response.code).json(response);
