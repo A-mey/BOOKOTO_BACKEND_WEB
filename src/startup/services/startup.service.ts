@@ -1,9 +1,10 @@
 import { catchError } from "../../common/utils/catch.util";
 import { ISessionServiceInterface } from "../../login/interfaces/ISession.service.interface";
+import { IStartupServices } from "../interfaces/Istartup.services.interface";
 import { User } from "../models/data/user.data.models";
 import { UserFactory } from "../models/factories/user.factory.models";
 
-export class StartupService {
+export class StartupService implements IStartupServices {
     
     sessionService: ISessionServiceInterface;
 
