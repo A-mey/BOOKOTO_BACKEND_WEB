@@ -18,6 +18,7 @@ export class StartupRoutes implements CommonRoutesConfig {
         this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
         this.startupController = startupController;
         this.idMiddleware = idMiddleware;
+        this.configureRoutes();
     }
 
     configureRoutes() {

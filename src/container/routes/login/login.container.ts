@@ -6,20 +6,13 @@ import loginSchema from "../../../login/schema/login.schema";
 import { LoginService } from "../../../login/services/login.service";
 import { LoginController } from "../../../login/controllers/login.controller";
 import { SessionService } from "../../../session/services/session.service";
-import { SessionDao } from "../../../session/dao/session.dao";
-import { ISessionDaoInterface } from "../../../session/interfaces/ISession.dao.interface";
-import { SessionMockDao } from "../../../session/dao/session.mock.dao";
 import { LoginDaoFactory } from "../../daoFactory/login.dao.factory";
+import { SessionDaoFactory } from "../../daoFactory/session.dao.factory";
 
 export const loginContainerService = (app: express.Application) => {
     const idMiddleware = new IdMiddleware();
     const loginDao = new LoginDaoFactory().getDao();
-    let sessionDao: ISessionDaoInterface;
-    if (process.env.DEPLOY_STAGE === "qc") {
-        sessionDao = new SessionMockDao();
-    } else {
-        sessionDao = new SessionDao();
-    }
+    const sessionDao = new SessionDaoFactory().getDao();
     const sessionService = new SessionService(sessionDao);
     const loginService = new LoginService(loginDao, sessionService);
     const loginController = new LoginController(loginService);

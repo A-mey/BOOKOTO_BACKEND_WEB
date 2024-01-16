@@ -16,7 +16,7 @@ export class BodyValidationMiddleware implements IBodyValidationMiddlewareInterf
     checkSchema = async (req: express.Request, res: express.Response, next: NextFunction) => {
         const origin: (keyof typeof this.schema) = req.originalUrl.replaceAll("/", "") as (keyof typeof this.schema);
         const schema = this.schema[origin];
-        console.log(schema);
+        console.log("schema", schema);
         if (schema) {
             const validateSchemaFn = await compileSchema.compile(schema);
             const errorRes: errorMessageObject =  await ValidateSchema.validateSchema(req.body, validateSchemaFn);
