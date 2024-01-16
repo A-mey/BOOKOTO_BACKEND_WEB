@@ -89,3 +89,45 @@
 [32m  label: 'Label🏷️',[39m
 [32m  timestamp: 'Jan-14-2024 04:29:51'[39m
 [32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:15:25'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /login/login',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:23:34'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /login/login',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:23:35'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /login/login',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:24:54'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /login/login',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:24:54'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-16-2024 17:25:35'[39m
+[32m}[39m
