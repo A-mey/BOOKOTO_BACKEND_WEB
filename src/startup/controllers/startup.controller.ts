@@ -20,10 +20,11 @@ export class StartupController implements IStartupControllerInterface {
                 console.log("sessionId", sessionId);
                 const user = await this.startupService.getUser(sessionId);
                 const sessionDetails = await this.startupService.processSession(user);
-                if (sessionDetails.SESSION_ID) {
+                if (user.constructor.name === "NewUser") {
                     res.cookie("SESSION_ID", sessionDetails.SESSION_ID, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: false });
                 }
-                res.status(200).json({code: 200, success: true, data: { message: "Session data fetched", data: sessionDetails}});
+                const productList = await this.startupService.getAllProducts(0, 10);
+                res.status(200).json({code: 200, success: true, data: { message: "Session data fetched", data: { SESSION_DATA: sessionDetails.DATA || {}, PRODUCTS: productList}}});
             } else {
                 const response = responseTemplateConstants.DEFAULT_ERROR;
                 res.status(response.code).json(response);
