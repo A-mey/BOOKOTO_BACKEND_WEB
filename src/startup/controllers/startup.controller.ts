@@ -12,10 +12,9 @@ export class StartupController implements IStartupControllerInterface {
 
     manageSession = async (req: express.Request, res: express.Response) => {
         try {
-            const userId = req.header("USERID");
-            const sessionId = req.header("SESSIONID");
-            if (userId !== undefined && sessionId !== undefined) {
-                const user = await this.startupService.getUser(userId, sessionId);
+            const sessionId = req.header("SESSION_ID") || "";
+            if (sessionId !== undefined) {
+                const user = await this.startupService.getUser(sessionId);
                 const sessionDetails = await this.startupService.processSession(user);
                 res.json(sessionDetails);
             } else {

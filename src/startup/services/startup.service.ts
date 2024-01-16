@@ -12,9 +12,9 @@ export class StartupService implements IStartupServices {
         this.sessionService = sessionService;
     }
 
-    getUser = async (userId: string, sessionId: string) => {
+    getUser = async (sessionId: string) => {
         try {
-            return await new UserFactory(userId, sessionId).getUser();
+            return await new UserFactory(sessionId).getUser();
         } catch (error) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);

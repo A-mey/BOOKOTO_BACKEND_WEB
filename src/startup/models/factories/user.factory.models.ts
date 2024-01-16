@@ -1,23 +1,18 @@
-import { AnonymousUser } from "../data/anonymous.user.data.models";
-import { LoggedUser } from "../data/logged.user.data.models";
+import { OldUser } from "../data/old.user.data.models";
 import { NewUser } from "../data/new.user.data.models";
 import { User } from "../data/user.data.models";
 
 export class UserFactory {
-    userId: string | undefined;
-    sessionId: string | undefined;
+    sessionId: string;
     
-    constructor(userId: string, sessionId: string) {
-        this.userId = userId;
+    constructor(sessionId: string) {
         this.sessionId = sessionId;
     }
 
     getUser = async () : Promise<User> => {
-        if (!this.userId && this.sessionId) {
-            return new AnonymousUser(this.sessionId);
-        } else if (this.userId && this.sessionId) {
-            return new LoggedUser(this.sessionId, this.userId);
-        } else if (!this.userId && !this.sessionId) {
+        if (this.sessionId) {
+            return new OldUser(this.sessionId);
+        } else if (!this.sessionId) {
             return new NewUser();
         } else {
             throw new Error();

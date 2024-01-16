@@ -1,0 +1,1 @@
+export type IsLoggedIn = "0"|"1";

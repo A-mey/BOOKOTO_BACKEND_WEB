@@ -4,18 +4,12 @@ import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.in
 import { IBodyValidationMiddlewareInterface } from "../../common/interfaces/IBody.validation.middleware";
 import { ILoginControllerInterface } from "../interfaces/ILogin.controller.interface";
 
-import { StartupController } from "../../startup/controllers/startup.controller";
-import { StartupService } from "../../startup/services/startup.service";
-import { SessionService } from "../../session/services/session.service";
-import { SessionMockDao } from "../../session/dao/session.mock.dao";
-
 export class LoginRoutes implements CommonRoutesConfig {
     private bodyValidationMiddleware: IBodyValidationMiddlewareInterface;
     app: express.Application;
     private name = "LoginRoutes";
     idMiddleware: IIdMiddleWareInterface;
     loginController: ILoginControllerInterface;
-    startupController: StartupController = new StartupController(new StartupService(new SessionService(new SessionMockDao)));
     
     constructor(app: express.Application, idMiddleware: IIdMiddleWareInterface, bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: ILoginControllerInterface) {
         this.app = app;
