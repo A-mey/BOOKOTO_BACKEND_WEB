@@ -9,5 +9,5 @@ export abstract class User implements IUserInterface{
         const sessionDao: ISessionDaoInterface = new SessionDaoFactory().getDao();
         this.sessionService = new SessionService(sessionDao);
     }
-    abstract processSession (): Promise<{SESSION_ID: string; data: object;} | {SESSION_ID: string}>
+    abstract processSession (): Promise<{SESSION_ID?: string; DATA?: object;}>
 }

@@ -21,7 +21,7 @@ export class StartupService implements IStartupServices {
         }
     };
 
-    processSession = async (user: User) : Promise<{ SESSION_ID: string; data: object; } | { SESSION_ID: string; }>=> {
+    processSession = async (user: User) : Promise<{ SESSION_ID?: string; DATA?: object; }>=> {
         return user.processSession();
     };
 

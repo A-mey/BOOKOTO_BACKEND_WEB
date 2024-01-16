@@ -1,4 +1,2 @@
-export type ValidateSessionDTO = {
-    SESSION_ID: string;
-    USER_ID: string;
-}
+import { GetSessionDTO } from "./get.session.dto";
+export interface ValidateSessionDTO extends GetSessionDTO{}

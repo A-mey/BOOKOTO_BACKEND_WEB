@@ -4,6 +4,7 @@ import { BodyValidationMiddleware } from "../../common/middleware/body.validatio
 import StartupSchema from "../schema/startup.schema";
 import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
 import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
+import { crossOrigin } from "../../common/middleware/origin.middleware";
 
 
 export class StartupRoutes implements CommonRoutesConfig {
@@ -22,6 +23,8 @@ export class StartupRoutes implements CommonRoutesConfig {
     }
 
     configureRoutes() {
+
+        this.app.use(crossOrigin);
 
         this.app.use(this.idMiddleware.createRequestId);
 

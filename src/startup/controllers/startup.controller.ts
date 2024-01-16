@@ -12,11 +12,18 @@ export class StartupController implements IStartupControllerInterface {
 
     manageSession = async (req: express.Request, res: express.Response) => {
         try {
-            const sessionId = req.header("SESSION_ID") || "";
-            if (sessionId !== undefined) {
+            console.log("request");
+            const cookie = req.headers.cookie || "";
+            console.log("sessionId", cookie);
+            if (cookie !== undefined) {
+                const sessionId = cookie.substring(11, cookie.length);
+                console.log("sessionId", sessionId);
                 const user = await this.startupService.getUser(sessionId);
                 const sessionDetails = await this.startupService.processSession(user);
-                res.json(sessionDetails);
+                if (sessionDetails.SESSION_ID) {
+                    res.cookie("SESSION_ID", sessionDetails.SESSION_ID, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000, sameSite: false });
+                }
+                res.status(200).json({code: 200, success: true, data: { message: "Session data fetched", data: sessionDetails}});
             } else {
                 const response = responseTemplateConstants.DEFAULT_ERROR;
                 res.status(response.code).json(response);

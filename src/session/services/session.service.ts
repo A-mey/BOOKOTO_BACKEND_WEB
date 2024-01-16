@@ -21,7 +21,7 @@ export class SessionService implements ISessionServiceInterface {
     validateSession = async (userId: string, sessionId: string) : Promise<boolean> => {
         const logger = await logFactoryService.getLog(this.logger, "validateSession");
         try {
-            const validateSessionDTO: ValidateSessionDTO = {USER_ID: userId, SESSION_ID: sessionId};
+            const validateSessionDTO: ValidateSessionDTO = {SESSION_ID: sessionId};
             const isSessionValidResponse = await this.sessionDao.validateSessionDao(validateSessionDTO);
             const isSessionValid = isSessionValidResponse.data.data as unknown as boolean;
             return isSessionValid;

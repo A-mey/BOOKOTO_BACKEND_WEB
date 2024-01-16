@@ -10,7 +10,7 @@ export class SessionMockDao implements ISessionDaoInterface {
 
     validateSessionDao = async (validateSessionDTO: ValidateSessionDTO) : Promise<Response> => {
         let response: Response;
-        if (validateSessionDTO.USER_ID === "1234" && validateSessionDTO.SESSION_ID === "ABCDEF12345") {
+        if (validateSessionDTO.SESSION_ID === "ABCDEF12345") {
             response = {code: 200, success: true, data: {message: "session validated"}};
         } else {
             response = {code: 400, success: false, data: {message: "session not validated"}};
@@ -24,7 +24,11 @@ export class SessionMockDao implements ISessionDaoInterface {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getSessionDataDao = async (getSessionDTO: GetSessionDTO) => {
-        return {code: 200, success: true, data: {message: "session created", data: {SESSION_ID: "ABCDEF12345", DATA: {}}}};
+        if (getSessionDTO.SESSION_ID === "ABCDEF12345") {
+            return {code: 200, success: true, data: {message: "session data fetched", data: {DATA: {}}}};
+        } else {
+            throw new Error("Invalid session id");
+        }
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

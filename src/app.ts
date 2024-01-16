@@ -1,6 +1,8 @@
 import express from "express";
 import * as http from "http";
 import * as dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
 const dotenvResult = dotenv.config({ path: `.env.${process.env.DEPLOY_STAGE}` });
 if (dotenvResult.error) {
     throw dotenvResult.error;
@@ -24,6 +26,7 @@ let routes: Array<CommonRoutesConfig> = [];
 // const debugLog: debug.IDebugger = debug("app");
 
 // here we are adding middleware to parse all incoming requests as JSON 
+app.use(cookieParser());
 app.use(express.json());
 
 // here we are adding middleware to allow cross-origin requests

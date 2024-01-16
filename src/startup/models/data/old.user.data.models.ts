@@ -10,7 +10,7 @@ export class OldUser extends User implements IUserInterface{
         this.sessionId = sessionId;
     }
 
-    processSession = async (): Promise<{SESSION_ID: string; DATA: object;}> => {
+    processSession = async (): Promise<{DATA: object;}> => {
         try {
             const getSessionData = this.sessionService.getSessionData(this.sessionId);
             return getSessionData;
