@@ -1,12 +1,12 @@
 import { Response } from "../../common/types/response.types";
-import { CreateOtpDTO } from "../../login/dto/create.otp.dto";
-import { ILoginDaoInterface } from "../../login/interfaces/ILogin.dao.interface";
-import { ValidateOtpDTO } from "../../login/dto/validate.otp.dto";
-import { LoginUserDTO } from "../../login/dto/login.user.dto";
-import { RegisterUserDTO } from "../../login/dto/register.user.dto";
+import { CreateOtpDTO } from "../dto/create.otp.dto";
+import { ILoginDaoInterface } from "../interfaces/ILogin.dao.interface";
+import { ValidateOtpDTO } from "../dto/validate.otp.dto";
+import { LoginUserDTO } from "../dto/login.user.dto";
+import { RegisterUserDTO } from "../dto/register.user.dto";
 
 
-export class LoginDaoTest implements ILoginDaoInterface {
+export class LoginMockDao implements ILoginDaoInterface {
 
     constructor () { }
 

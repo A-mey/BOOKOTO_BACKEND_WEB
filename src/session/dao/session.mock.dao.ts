@@ -1,10 +1,10 @@
 import { Response } from "../../common/types/response.types";
-import { ISessionDaoInterface } from "../../common/session/interfaces/ISession.dao.interface";
-import { ValidateSessionDTO } from "../../common/session/dto/validate.session.dto";
-import { GetSessionDTO } from "../../common/session/dto/get.session.dto";
-import { AddSessionDTO } from "../../common/session/dto/add.session.dto";
+import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
+import { ValidateSessionDTO } from "../dto/validate.session.dto";
+import { GetSessionDTO } from "../dto/get.session.dto";
+import { AddSessionDTO } from "../dto/add.session.dto";
 
-export class SessionDaoTest implements ISessionDaoInterface {
+export class SessionMockDao implements ISessionDaoInterface {
     
     constructor() { }
 

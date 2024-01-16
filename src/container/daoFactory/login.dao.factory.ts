@@ -1,6 +1,6 @@
 import { ILoginDaoInterface } from "../../login/interfaces/ILogin.dao.interface";
 import { LoginDao } from "../../login/dao/login.dao";
-import { LoginDaoTest } from "../../test/dao/login.dao.test";
+import { LoginMockDao } from "../../login/dao/login.mock.dao";
 
 export class LoginDaoFactory {
     constructor() {}
@@ -9,7 +9,7 @@ export class LoginDaoFactory {
         let loginDao: ILoginDaoInterface;
         console.log("process.env.DEPLOY_STAGE", process.env.DEPLOY_STAGE);
         if (process.env.DEPLOY_STAGE === "qc") {
-            loginDao = new LoginDaoTest();
+            loginDao = new LoginMockDao();
         } else {
             loginDao = new LoginDao();
         }

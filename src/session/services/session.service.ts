@@ -1,7 +1,8 @@
-import { ISessionServiceInterface } from "../../../login/interfaces/ISession.service.interface";
-import logFactoryService from "../../services/logger/log.factory.service";
-import { LogService } from "../../services/logger/log.service";
-import { catchError } from "../../utils/catch.util";
+import { ISessionServiceInterface } from "../interfaces/ISession.service.interface";
+import logFactoryService from "../../common/services/logger/log.factory.service";
+// import logFactoryService from "../../services/logger/log.factory.service";
+import { LogService } from "../../common/services/logger/log.service";
+import { catchError } from "../../common/utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
 import { GetSessionDTO } from "../dto/get.session.dto";

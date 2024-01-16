@@ -1,4 +1,4 @@
-import { SessionService } from "../../common/session/services/session.service";
+import { SessionService } from "../../session/services/session.service";
 import { ISessionServiceInterface } from "../../login/interfaces/ISession.service.interface";
 import { SessionDaoFactory } from "../daoFactory/session.dao.factory";
 

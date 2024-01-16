@@ -1,6 +1,6 @@
-import { SessionService } from "../../../common/session/services/session.service";
+import { SessionService } from "../../../session/services/session.service";
 import { IUserInterface } from "../../interfaces/IUser.interface";
-import { ISessionDaoInterface } from "../../../common/session/interfaces/ISession.dao.interface";
+import { ISessionDaoInterface } from "../../../session/interfaces/ISession.dao.interface";
 import { SessionDaoFactory } from "../../../container/daoFactory/session.dao.factory";
 
 export abstract class User implements IUserInterface{

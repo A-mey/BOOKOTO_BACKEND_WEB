@@ -1,5 +1,5 @@
 import express, { NextFunction } from "express";
-import { SessionService } from "../session/services/session.service";
+import { SessionService } from "../services/session.service";
 
 export class SessionValidationMiddleware {
     sessionService: SessionService;

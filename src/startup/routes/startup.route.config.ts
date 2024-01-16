@@ -26,7 +26,7 @@ export class StartupRoutes implements CommonRoutesConfig {
 
         // this.app.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route("/startApp")
+        this.app.route("/StartPage")
             .get(
                 this.startupController.manageSession
             );

@@ -1,10 +1,10 @@
-import { NullException } from "../../error/exceptions/null.exception.error";
-import logFactoryService from "../../services/logger/log.factory.service";
-import { LogService } from "../../services/logger/log.service";
-import { Response } from "../../types/response.types";
-import { catchError } from "../../utils/catch.util";
+import { NullException } from "../../common/error/exceptions/null.exception.error";
+import logFactoryService from "../../common/services/logger/log.factory.service";
+import { LogService } from "../../common/services/logger/log.service";
+import { Response } from "../../common/types/response.types";
+import { catchError } from "../../common/utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
-import HttpRequestService from "../../services/http/http.services";
+import HttpRequestService from "../../common/services/http/http.services";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
 import { GetSessionDTO } from "../dto/get.session.dto";
 import { AddSessionDTO } from "../dto/add.session.dto";

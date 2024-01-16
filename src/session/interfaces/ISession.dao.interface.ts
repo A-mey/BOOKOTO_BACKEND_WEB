@@ -1,4 +1,4 @@
-import { Response } from "../../types/response.types";
+import { Response } from "../../common/types/response.types";
 import { GetSessionDTO } from "../dto/get.session.dto";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
 import { AddSessionDTO } from "../dto/add.session.dto";

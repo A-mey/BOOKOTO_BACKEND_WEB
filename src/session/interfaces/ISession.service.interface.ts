@@ -1,4 +1,4 @@
-import { AddSessionDTO } from "../../session/dto/add.session.dto";
+import { AddSessionDTO } from "../dto/add.session.dto";
 
 export interface ISessionServiceInterface {
     validateSession (userId: string, sessionId: string) : Promise<boolean>
