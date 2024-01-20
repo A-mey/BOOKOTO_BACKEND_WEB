@@ -11,12 +11,27 @@ export class ProductDao implements IProductDaoInterface{
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     getAllProductsDao = async (from: number, to: number) : Promise<Product[]> => {
         try {
-            const url = process.env.PRODUCT_URL;
+            const url = process.env.PRODUCT_LIST_URL;
             if (!url) {
                 throw new NullException();
             }
             const products = await httpServices.getRequest(url) as Product[];
             return products;
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        }
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    getProductDetailsByIdDao = async (id: string) : Promise<Product> => {
+        try {
+            const url = process.env.PRODUCT_DETAILS_URL;
+            if (!url) {
+                throw new NullException();
+            }
+            const productDetails = await httpServices.getRequest(url) as Product;
+            return productDetails;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);

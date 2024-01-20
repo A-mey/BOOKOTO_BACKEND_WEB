@@ -19,4 +19,14 @@ export class ProductService implements IProductServiceInterface {
             throw new Error(errorMsg);
         }
     };
+
+    getProductDetailsById = async (id: string) : Promise<Product> => {
+        try {
+            const productDetails = await this.productDao.getProductDetailsByIdDao(id);
+            return productDetails;
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        }
+    }
 }
