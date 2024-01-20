@@ -3,6 +3,7 @@ import { Product } from "../types/product.type";
 import { NullException } from "../../common/error/exceptions/null.exception.error";
 import { catchError } from "../../common/utils/catch.util";
 import { IProductDaoInterface } from "../interfaces/IProduct.dao.interface";
+import { ProductResponse } from "../types/product.response.type";
 
 export class ProductMockDao implements IProductDaoInterface {
 
@@ -20,7 +21,8 @@ export class ProductMockDao implements IProductDaoInterface {
             }
             url = url.replace("${KEY}", key).replace("${START_INDEX}", from.toString()).replace("${END_INDEX}", to.toString());
             console.log("url", url);
-            const products = await httpServices.getRequest(url) as Product[];
+            const productsResponse = await httpServices.getRequest(url) as ProductResponse;
+            const products = productsResponse.items;
             console.log("products", products);
             return products;
         } catch (error: unknown) {
