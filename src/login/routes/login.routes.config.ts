@@ -1,6 +1,5 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
 import express from "express";
-import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
 import { IBodyValidationMiddlewareInterface } from "../../common/interfaces/IBody.validation.middleware";
 import { ILoginControllerInterface } from "../interfaces/ILogin.controller.interface";
 
@@ -8,20 +7,16 @@ export class LoginRoutes implements CommonRoutesConfig {
     private bodyValidationMiddleware: IBodyValidationMiddlewareInterface;
     app: express.Application;
     private name = "LoginRoutes";
-    idMiddleware: IIdMiddleWareInterface;
     loginController: ILoginControllerInterface;
     
-    constructor(app: express.Application, idMiddleware: IIdMiddleWareInterface, bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: ILoginControllerInterface) {
+    constructor(app: express.Application, bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: ILoginControllerInterface) {
         this.app = app;
         this.bodyValidationMiddleware = bodyValidationMiddleware;
-        this.idMiddleware = idMiddleware;
         this.loginController = loginController;
         this.configureRoutes();
     }
     
     configureRoutes() {
-
-        this.app.use(this.idMiddleware.createRequestId);
 
         this.app.use(this.bodyValidationMiddleware.checkSchema);
 

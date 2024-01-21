@@ -16,6 +16,7 @@ import { CommonRoutesConfig } from "./common/common.routes.config";
 import helmet from "helmet";
 import httpContext from "express-http-context";
 import { containerService } from "./container/routes/main.container";
+import { IdMiddleware } from "./common/middleware/id.middleware";
 
 
 const app: express.Application = express();
@@ -76,6 +77,7 @@ if (!process.env.DEBUG) {
 
 // initialize the logger with the above configuration
 app.use(expressWinston.logger(loggerOptions));
+app.use(new IdMiddleware().createRequestId);
 
 routes = containerService(routes, app);
 

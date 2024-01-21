@@ -3,7 +3,6 @@ import express from "express";
 import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
 import StartupSchema from "../schema/startup.schema";
 import { IStartupControllerInterface } from "../interfaces/IStartup.controllers.interface";
-import { IIdMiddleWareInterface } from "../../common/interfaces/IId.middlewar.interface";
 import { crossOrigin } from "../../common/middleware/origin.middleware";
 
 
@@ -12,21 +11,17 @@ export class StartupRoutes implements CommonRoutesConfig {
     app: express.Application;
     private name = "StartupRoutes";
     startupController: IStartupControllerInterface;
-    idMiddleware: IIdMiddleWareInterface;
     
-    constructor(app: express.Application, startupController: IStartupControllerInterface, idMiddleware: IIdMiddleWareInterface) {
+    constructor(app: express.Application, startupController: IStartupControllerInterface) {
         this.app = app;
         this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
         this.startupController = startupController;
-        this.idMiddleware = idMiddleware;
         this.configureRoutes();
     }
 
     configureRoutes() {
 
         this.app.use(crossOrigin);
-
-        this.app.use(this.idMiddleware.createRequestId);
 
         this.app.route("/StartPage")
             .get(
