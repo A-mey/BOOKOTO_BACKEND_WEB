@@ -1,14 +1,14 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
 import express from "express";
-import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
+// import { BodyValidationMiddleware } from "../../common/middleware/body.validation.middleware";
 import { IProductControllerInterface } from "../interfaces/IProduct.controller.interface";
 import { IdMiddleware } from "../../common/middleware/id.middleware";
 // import StartupSchema from "..";
 
 
 
-export class StartupRoutes implements CommonRoutesConfig {
-    bodyValidationMiddleware: BodyValidationMiddleware;
+export class ProductRoutes implements CommonRoutesConfig {
+    // bodyValidationMiddleware: BodyValidationMiddleware;
     app: express.Application;
     private name = "StartupRoutes";
     productController: IProductControllerInterface;
@@ -16,7 +16,7 @@ export class StartupRoutes implements CommonRoutesConfig {
     
     constructor(app: express.Application, productController: IProductControllerInterface) {
         this.app = app;
-        this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
+        // this.bodyValidationMiddleware = new BodyValidationMiddleware(StartupSchema);
         this.productController = productController;
         this.idMiddleware = new IdMiddleware();
         this.configureRoutes();
@@ -25,7 +25,7 @@ export class StartupRoutes implements CommonRoutesConfig {
     configureRoutes() {
 
         this.app.use(this.idMiddleware.createRequestId);
-        this.app.use(this.bodyValidationMiddleware.checkSchema);
+        // this.app.use(this.bodyValidationMiddleware.checkSchema);
 
         this.app.route("/products")
             .get(

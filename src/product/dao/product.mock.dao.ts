@@ -37,7 +37,12 @@ export class ProductMockDao implements IProductDaoInterface {
             if (!url) {
                 throw new NullException();
             }
-            url = url.replace("${ID}", id);
+            const key = process.env.GOOGLE_BOOKS_KEY;
+            if (!key) {
+                throw new NullException();
+            }
+            url = url.replace("${KEY}", key).replace("${ID}", id);
+            console.log("url", url);
             const productDetails = await httpServices.getRequest(url) as Product;
             return productDetails;
         } catch (error: unknown) {

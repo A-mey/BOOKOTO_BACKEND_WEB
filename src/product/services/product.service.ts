@@ -28,5 +28,5 @@ export class ProductService implements IProductServiceInterface {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);
         }
-    }
+    };
 }

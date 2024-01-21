@@ -16,7 +16,8 @@ export class ProductController implements IProductControllerInterface {
             const productList = await this.productService.getAllProducts(req.body.from, req.body.to);
             res.status(200).json({success: false, code: 200, data: {message: "Products fetched", data: productList}});
         } catch (error: unknown) {
-            // const errorMsg = await catchError(error);
+            const errorMsg = await catchError(error);
+            console.log(errorMsg);
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
         }
@@ -24,9 +25,11 @@ export class ProductController implements IProductControllerInterface {
 
     getProductById = async (req: express.Request, res: express.Response) => {
         try {
-            const product = await this.productService.getProductDetailsById(req.body.id);
+            const product = await this.productService.getProductDetailsById(req.params.id);
             res.status(200).json({success: false, code: 200, data: {message: "Product fetched", data: product}});
         } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            console.log(errorMsg);
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
         }
