@@ -49,7 +49,7 @@ export class RabbitMQ {
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);
-        }   
+        }
     };
 
 
