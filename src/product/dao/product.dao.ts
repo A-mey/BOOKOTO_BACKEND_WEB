@@ -37,13 +37,4 @@ export class ProductDao implements IProductDaoInterface{
             throw new Error(errorMsg);
         }
     };
-
-    saveToRecentProductsDao = async (id: string) : Promise<void> => {
-        try {
-            await 
-        } catch (error: unknown) {
-            const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
-        }
-    };
 }

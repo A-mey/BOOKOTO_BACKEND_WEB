@@ -1,13 +1,16 @@
 import { catchError } from "../../common/utils/catch.util";
+import { IRecentServiceInterface } from "../../recent/interfaces/IRecent.service.interface";
 import { IProductDaoInterface } from "../interfaces/IProduct.dao.interface";
 import { IProductServiceInterface } from "../interfaces/IProduct.service.interface";
 import { Product } from "../types/product.type";
 
 export class ProductService implements IProductServiceInterface {
     productDao: IProductDaoInterface;
+    recentService: IRecentServiceInterface;
     
-    constructor (productDao: IProductDaoInterface) {
+    constructor (productDao: IProductDaoInterface, recentService: IRecentServiceInterface) {
         this.productDao = productDao;
+        this.recentService = recentService;
     }
 
     getAllProducts = async (from: number, to: number) : Promise<Product[]> => {
@@ -32,7 +35,7 @@ export class ProductService implements IProductServiceInterface {
 
     saveToRecentProducts = async (id: string) : Promise<void> => {
         try {
-            await this.productDao.saveToRecentProductsDao(id);
+            await this.recentService.addProductToRecent(id);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg);
