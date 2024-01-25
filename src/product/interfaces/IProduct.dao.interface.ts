@@ -4,4 +4,5 @@ export interface IProductDaoInterface {
 
     getAllProductsDao (from: number, to: number) : Promise<Product[]>
     getProductDetailsByIdDao (id: string) : Promise<Product>
+    saveToRecentProductsDao (id: string) : Promise<void>
 }

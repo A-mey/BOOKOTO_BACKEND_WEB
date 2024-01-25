@@ -29,4 +29,13 @@ export class ProductService implements IProductServiceInterface {
             throw new Error(errorMsg);
         }
     };
+
+    saveToRecentProducts = async (id: string) : Promise<void> => {
+        try {
+            await this.productDao.saveToRecentProductsDao(id);
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        }
+    };
 }
