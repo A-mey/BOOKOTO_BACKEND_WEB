@@ -1,12 +1,16 @@
 import amqp from "amqplib";
+import { catchError } from "../../utils/catch.util";
 
 export class RabbitMQ {
     public connection: amqp.Connection | undefined;
     public channel: amqp.Channel | undefined;
+    public queue: string = "";
 
-    constructor() {
+    constructor(queue: string) {
+        this.queue = queue;
         (async() => {
-            this.createChannel();
+            await this.createChannel();
+            await this.createQueue(this.queue);
         });
     }
 
@@ -22,7 +26,30 @@ export class RabbitMQ {
     };
 
     createQueue = async (queue: string) => {
-        await this.channel?.assertQueue(queue, { durable: false });
+        try {
+            if (!this.channel) {
+                throw new Error("Queue connection error");
+            }
+            await this.channel.assertQueue(queue, { durable: false });
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        }
+    };
+
+    send = async (message: string) => {
+        try {
+            if (!this.channel) {
+                throw new Error("Queue connection error");
+            }
+            if (!this.queue) {
+                throw new Error("No queue selected");
+            }
+            this.channel.sendToQueue(this.queue, Buffer.from(JSON.stringify(message)));
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg);
+        }   
     };
 
 
