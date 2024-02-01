@@ -573,3 +573,45 @@
 [32m  label: 'Label🏷️',[39m
 [32m  timestamp: 'Jan-21-2024 02:14:12'[39m
 [32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 18:38:34'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 19:37:59'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 19:43:34'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 19:43:38'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 19:43:55'[39m
+[32m}[39m
+[32m{[39m
+[32m  meta: {},[39m
+[32m  level: 'info',[39m
+[32m  message: 'HTTP GET /StartPage',[39m
+[32m  label: 'Label🏷️',[39m
+[32m  timestamp: 'Jan-25-2024 19:44:11'[39m
+[32m}[39m
