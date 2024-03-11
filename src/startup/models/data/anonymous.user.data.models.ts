@@ -16,7 +16,8 @@ export class AnonymousUser extends User implements IUserInterface{
             const sessionData = await this.sessionService.getSessionData(this.sessionId);
             return sessionData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            const errorMessage = await catchError(error)
+            throw new Error(errorMessage.message);
         }
     };
 }

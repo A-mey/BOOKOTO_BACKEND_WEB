@@ -19,7 +19,7 @@ export class ProductService implements IProductServiceInterface {
             return products;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -29,7 +29,7 @@ export class ProductService implements IProductServiceInterface {
             return productDetails;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -38,7 +38,7 @@ export class ProductService implements IProductServiceInterface {
             await this.recentService.addProductToRecent(id);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 }

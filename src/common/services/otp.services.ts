@@ -19,7 +19,7 @@ export class OtpService {
             }
             return otpObj;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            throw new Error(await catchError(error.message));
         }
         
     }

@@ -27,7 +27,7 @@ export class ProductMockDao implements IProductDaoInterface {
             return products;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -47,7 +47,7 @@ export class ProductMockDao implements IProductDaoInterface {
             return productDetails;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 }

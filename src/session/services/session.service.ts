@@ -28,7 +28,7 @@ export class SessionService implements ISessionServiceInterface {
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
             logger.error("error", errorMsg);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -41,7 +41,7 @@ export class SessionService implements ISessionServiceInterface {
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
             logger.error("error", errorMsg);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -55,7 +55,7 @@ export class SessionService implements ISessionServiceInterface {
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
             logger.error("error", errorMsg);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -69,7 +69,7 @@ export class SessionService implements ISessionServiceInterface {
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
             logger.error("error", errorMsg);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
     

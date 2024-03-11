@@ -21,7 +21,7 @@ export class StartupService implements IStartupServices {
             return await new UserFactory(sessionId).getUser();
         } catch (error) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -34,7 +34,7 @@ export class StartupService implements IStartupServices {
             return await this.sessionService.createSession();
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -44,7 +44,7 @@ export class StartupService implements IStartupServices {
             return true;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         } 
     };
 
@@ -54,7 +54,7 @@ export class StartupService implements IStartupServices {
             products = await this.productService.getAllProducts(from, to);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            console.log(errorMsg); 
+            console.log(errorMsg.message); 
         }
         return products;
     };

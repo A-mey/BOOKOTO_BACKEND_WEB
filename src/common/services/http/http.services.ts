@@ -8,7 +8,8 @@ class HttpRequestService implements IHttpReq {
             const returnData = await CommonHttpService.httpRequest("get", url);
             return returnData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg.message);
         }
     }
 
@@ -17,7 +18,8 @@ class HttpRequestService implements IHttpReq {
             const returnData = await CommonHttpService.httpRequest("post", url, data);
             return returnData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            const errorMsg = await catchError(error);
+            throw new Error(errorMsg.message);
         }
     }
 }

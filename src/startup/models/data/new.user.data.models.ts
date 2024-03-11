@@ -12,7 +12,8 @@ export class NewUser extends User implements IUserInterface {
             const sessionData = await this.sessionService.createSession();
             return sessionData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            const errorMessage = await catchError(error)
+            throw new Error(errorMessage.message);
         }
     };
 }

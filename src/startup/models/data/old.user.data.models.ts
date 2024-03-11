@@ -15,7 +15,8 @@ export class OldUser extends User implements IUserInterface{
             const getSessionData = this.sessionService.getSessionData(this.sessionId);
             return getSessionData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            const errorMessage = await catchError(error)
+            throw new Error(errorMessage.message);
         }
     };
 }

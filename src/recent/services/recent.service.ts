@@ -14,7 +14,7 @@ export class RecentService implements IRecentServiceInterface {
             await this.recentDao.saveToRecentProductsDao(id);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 }

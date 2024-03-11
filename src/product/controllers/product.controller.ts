@@ -17,7 +17,7 @@ export class ProductController implements IProductControllerInterface {
             res.status(200).json({success: false, code: 200, data: {message: "Products fetched", data: productList}});
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            console.log(errorMsg);
+            console.log(errorMsg.message);
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
         }
@@ -29,7 +29,7 @@ export class ProductController implements IProductControllerInterface {
             res.status(200).json({success: false, code: 200, data: {message: "Product fetched", data: product}});
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            console.log(errorMsg);
+            console.log(errorMsg.message);
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
         }

@@ -15,19 +15,26 @@ export class KafkaProducer extends KafkaJSClass {
             await this.producer.connect();
             console.log("producer connected");
         }
-        catch(e: unknown) {
-            console.log(await catchError(e));
+        catch(error: unknown) {
+            const errorMsg = await catchError(error);
+            console.log(errorMsg.message);
         }
     };
 
     send = async (message: unknown) => {
-        const data = message as string;
-        await this.producer.send({
-            topic: this.topic,
-            messages: [
-                { value: data },
-            ],
-        });
+        try {
+            const data = message as string;
+            await this.producer.send({
+                topic: this.topic,
+                messages: [
+                    { value: data },
+                ],
+            });
+        } catch (error: unknown) {
+            const errorMsg = await catchError(error);
+            console.log(errorMsg.message);
+        }
+        
     };
 
     disconnect = async () => {

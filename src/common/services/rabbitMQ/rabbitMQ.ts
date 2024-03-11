@@ -33,7 +33,7 @@ export class RabbitMQ {
             await this.channel.assertQueue(queue, { durable: false });
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 
@@ -48,7 +48,7 @@ export class RabbitMQ {
             this.channel.sendToQueue(this.queue, Buffer.from(JSON.stringify(message)));
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 

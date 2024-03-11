@@ -14,7 +14,7 @@ export class RecentDAO implements IRecentDaoInterface {
             await this.rabbitMQ.send(id);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            throw new Error(errorMsg);
+            throw new Error(errorMsg.message);
         }
     };
 }
