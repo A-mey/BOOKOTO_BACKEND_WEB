@@ -27,7 +27,7 @@ export class SessionService implements ISessionServiceInterface {
             return isSessionValid;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -40,7 +40,7 @@ export class SessionService implements ISessionServiceInterface {
             return sessionId;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -54,7 +54,7 @@ export class SessionService implements ISessionServiceInterface {
             return sessionData;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -68,7 +68,7 @@ export class SessionService implements ISessionServiceInterface {
             }
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };

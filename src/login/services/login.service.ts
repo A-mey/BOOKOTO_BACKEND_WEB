@@ -26,11 +26,11 @@ export class LoginService implements ILoginServiceInterface {
         const logger = await logFactoryService.getLog(this.logger, "createOTPService");
         try {
             const checkAuthResponse = await this.loginDao.createOTPDao(createOtpDTO);
-            logger.log("checkAuthResponse", checkAuthResponse);
+            logger.info("checkAuthResponse", checkAuthResponse);
             return checkAuthResponse;
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -39,11 +39,11 @@ export class LoginService implements ILoginServiceInterface {
         const logger = await logFactoryService.getLog(this.logger, "validateOTPService");
         try {
             const otpValidationResponse = await this.loginDao.validateOtpDao(validateOtpDto);
-            logger.log("otpValidationResponse", otpValidationResponse);
+            logger.info("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -52,11 +52,11 @@ export class LoginService implements ILoginServiceInterface {
         const logger = await logFactoryService.getLog(this.logger, "registerUserService");
         try {
             const otpValidationResponse = await this.loginDao.registerUserDao(registerUserDTO);
-            logger.log("otpValidationResponse", otpValidationResponse);
+            logger.info("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -65,11 +65,11 @@ export class LoginService implements ILoginServiceInterface {
         const logger = await logFactoryService.getLog(this.logger, "registerUserService");
         try {
             const otpValidationResponse = await this.loginDao.loginUserDao(loginUserDTO);
-            logger.log("otpValidationResponse", otpValidationResponse);
+            logger.info("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -84,7 +84,7 @@ export class LoginService implements ILoginServiceInterface {
             await this.sessionService.addSession(dataToInsert);
         } catch(error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };

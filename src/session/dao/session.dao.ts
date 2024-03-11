@@ -27,7 +27,7 @@ export class SessionDao implements ISessionDaoInterface {
             return getOtpData;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -43,7 +43,7 @@ export class SessionDao implements ISessionDaoInterface {
             return createSessionDaoResponse;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -59,7 +59,7 @@ export class SessionDao implements ISessionDaoInterface {
             return sessionDataResponse;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -75,7 +75,7 @@ export class SessionDao implements ISessionDaoInterface {
             return addSessionDaoResponse;
         } catch (error : unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };

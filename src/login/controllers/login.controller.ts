@@ -26,10 +26,10 @@ export class LoginController implements ILoginControllerInterface {
         try{
             const emailIdDto = req.body.EMAILID;
             const createOTPServiceResponse: Response = await this.loginService.createOTPService(emailIdDto);
-            logger.log("createOTPServiceResponse", createOTPServiceResponse);
+            logger.info("createOTPServiceResponse", createOTPServiceResponse);
             res.status(createOTPServiceResponse.code).json(createOTPServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.error("error", await catchError(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -39,10 +39,10 @@ export class LoginController implements ILoginControllerInterface {
         try{
             const validateOtpDto = req.body as ValidateOtpDTO;
             const validateOTPServiceResponse: Response = await this.loginService.validateOTPService(validateOtpDto);
-            logger.log("validateOTPServiceResponse", validateOTPServiceResponse);
+            logger.info("validateOTPServiceResponse", validateOTPServiceResponse);
             res.status(validateOTPServiceResponse.code).json(validateOTPServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.error("error", await catchError(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -52,10 +52,10 @@ export class LoginController implements ILoginControllerInterface {
         try{
             const registerUserDto = req.body as RegisterUserDTO;
             const registerUserServiceResponse: Response = await this.loginService.registerUserService(registerUserDto);
-            logger.log("registerUserServiceResponse", registerUserServiceResponse);
+            logger.info("registerUserServiceResponse", registerUserServiceResponse);
             res.status(registerUserServiceResponse.code).json(registerUserServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.error("error", await catchError(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -74,7 +74,7 @@ export class LoginController implements ILoginControllerInterface {
                 res.status(500).json(responseTemplates.DEFAULT_ERROR);
             }
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.error("error", await catchError(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };

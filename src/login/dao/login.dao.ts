@@ -29,7 +29,7 @@ export class LoginDao implements ILoginDaoInterface {
             return getOtpData;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }  
     };
@@ -45,7 +45,7 @@ export class LoginDao implements ILoginDaoInterface {
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }  
     };
@@ -61,7 +61,7 @@ export class LoginDao implements ILoginDaoInterface {
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
@@ -77,10 +77,8 @@ export class LoginDao implements ILoginDaoInterface {
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            logger.error("error", errorMsg);
             throw new Error(errorMsg);
         } 
     };
-
-
 }
