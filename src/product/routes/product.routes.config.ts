@@ -6,7 +6,7 @@ import { IProductMiddlewareInterface } from "../interfaces/IProduct.middleware.i
 export class ProductRoutes implements CommonRoutesConfig {
     // bodyValidationMiddleware: BodyValidationMiddleware;
     app: express.Application;
-    private name = "StartupRoutes";
+    private name = "ProductRoutes";
     productController: IProductControllerInterface;
     productMiddleware: IProductMiddlewareInterface;
     
