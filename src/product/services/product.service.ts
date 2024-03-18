@@ -3,6 +3,7 @@ import { IRecentServiceInterface } from "../../recent/interfaces/IRecent.service
 import { IProductDaoInterface } from "../interfaces/IProduct.dao.interface";
 import { IProductServiceInterface } from "../interfaces/IProduct.service.interface";
 import { Product } from "../types/product.type";
+import { UserProduct } from "../types/user.product.type";
 
 export class ProductService implements IProductServiceInterface {
     productDao: IProductDaoInterface;
@@ -33,9 +34,10 @@ export class ProductService implements IProductServiceInterface {
         }
     };
 
-    saveToRecentProducts = async (id: string) : Promise<void> => {
+    saveToRecentProducts = async (userProduct: UserProduct) : Promise<void> => {
         try {
-            await this.recentService.addProductToRecent(id);
+            // const saveRecent = { USER_ID: userId, PRODUCT_ID: productId };
+            await this.recentService.addProductToRecent(userProduct);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg.message);

@@ -1,3 +1,5 @@
+import { UserProduct } from "../../product/types/user.product.type";
+
 export interface IRecentDaoInterface {
-    saveToRecentProductsDao (id: string) : Promise<void>
+    saveToRecentProductsDao (userProduct : UserProduct) : Promise<void>
 }

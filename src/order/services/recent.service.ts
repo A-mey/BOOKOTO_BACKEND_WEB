@@ -1,5 +1,4 @@
 import { catchError } from "../../common/utils/catch.util";
-import { UserProduct } from "../../product/types/user.product.type";
 import { IRecentDaoInterface } from "../interfaces/IRecent.dao.interface";
 import { IRecentServiceInterface } from "../interfaces/IRecent.service.interface";
 
@@ -10,9 +9,9 @@ export class RecentService implements IRecentServiceInterface {
         this.recentDao = recentDao;
     }
 
-    addProductToRecent = async (userProduct : UserProduct) : Promise<void> => {
+    addProductToRecent = async (id: string) : Promise<void> => {
         try {
-            await this.recentDao.saveToRecentProductsDao(userProduct);
+            await this.recentDao.saveToRecentProductsDao(id);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg.message);

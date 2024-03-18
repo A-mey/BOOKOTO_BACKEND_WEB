@@ -1,3 +1,5 @@
+import { UserProduct } from "../../product/types/user.product.type";
+
 export interface IRecentServiceInterface {
-    addProductToRecent (id: string) : Promise<void>
+    addProductToRecent (userProduct : UserProduct) : Promise<void>
 }
