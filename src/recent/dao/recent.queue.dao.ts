@@ -1,17 +1,18 @@
 import { RabbitMQ } from "../../common/services/rabbitMQ/rabbitMQ";
 import { catchError } from "../../common/utils/catch.util";
-import { IRecentDaoInterface } from "../interfaces/IRecent.dao.interface";
+import { UserProduct } from "../../product/types/user.product.type";
+import { IRecentQueueDaoInterface } from "../interfaces/IRecent.queue.dao.interface";
 
-export class RecentDAO implements IRecentDaoInterface {
+export class RecentQueueDao implements IRecentQueueDaoInterface {
     rabbitMQ: RabbitMQ;
 
     constructor () {
         this.rabbitMQ = new RabbitMQ("recent");
     }
 
-    saveToRecentProductsDao = async (id: string) : Promise<void> => {
+    saveToRecentProductsDao = async (userProduct : UserProduct) : Promise<void> => {
         try {
-            await this.rabbitMQ.send(id);
+            await this.rabbitMQ.send(userProduct);
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             throw new Error(errorMsg.message);

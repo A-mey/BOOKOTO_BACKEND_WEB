@@ -4,7 +4,7 @@ import { ProductDaoFactory } from "../../daoFactory/product.dao.factory";
 import { ProductService } from "../../../product/services/product.service";
 import { ProductController } from "../../../product/controllers/product.controller";
 import { ProductMiddleware } from "../../../product/middlewares/product.middleware";
-import { RecentDAO } from "../../../recent/dao/recent.dao";
+import { RecentDAO } from "../../../recent/dao/recent.queue.dao";
 import { RecentService } from "../../../recent/services/recent.service";
 
 export const productContainerService = (app: express.Application) => {

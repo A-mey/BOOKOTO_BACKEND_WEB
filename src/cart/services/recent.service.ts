@@ -1,8 +1,8 @@
 import { catchError } from "../../common/utils/catch.util";
-import { IRecentDaoInterface } from "../interfaces/IRecent.dao.interface";
-import { IRecentServiceInterface } from "../interfaces/IRecent.service.interface";
+import { IRecentDaoInterface } from "../interfaces/ICart.dao.interface";
+import { IRecentServiceInterface } from "../interfaces/ICart.service.interface";
 
-export class RecentService implements IRecentServiceInterface {
+export class CartService implements IRecentServiceInterface {
     recentDao: IRecentDaoInterface;
     
     constructor(recentDao: IRecentDaoInterface) {

@@ -37,7 +37,7 @@ export class RabbitMQ {
         }
     };
 
-    send = async (message: string) => {
+    send = async (message: object) => {
         try {
             if (!this.channel) {
                 throw new Error("Queue connection error");

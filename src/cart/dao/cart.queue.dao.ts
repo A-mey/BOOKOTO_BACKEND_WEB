@@ -1,8 +1,8 @@
 import { RabbitMQ } from "../../common/services/rabbitMQ/rabbitMQ";
 import { catchError } from "../../common/utils/catch.util";
-import { IRecentDaoInterface } from "../interfaces/IRecent.dao.interface";
+import { IRecentDaoInterface } from "../interfaces/ICart.dao.interface";
 
-export class RecentDAO implements IRecentDaoInterface {
+export class CartDAO implements IRecentDaoInterface {
     rabbitMQ: RabbitMQ;
 
     constructor () {

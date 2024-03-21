@@ -25,7 +25,7 @@ export class LoginDao implements ILoginDaoInterface {
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, createOtpDTO) as Response;
+            const getOtpData = await HttpRequestService.postRequest(url, {}, createOtpDTO) as Response;
             return getOtpData;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -41,7 +41,7 @@ export class LoginDao implements ILoginDaoInterface {
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, validateOtpDto) as Response;
+            const getOtpData = await HttpRequestService.postRequest(url, {}, validateOtpDto) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -57,7 +57,7 @@ export class LoginDao implements ILoginDaoInterface {
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, registerUserDTO) as Response;
+            const getOtpData = await HttpRequestService.postRequest(url, {}, registerUserDTO) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -73,7 +73,7 @@ export class LoginDao implements ILoginDaoInterface {
             if (!url) {
                 throw new NullException();
             }
-            const getOtpData = await HttpRequestService.postRequest(url, loginUserDTO) as Response;
+            const getOtpData = await HttpRequestService.postRequest(url, {}, loginUserDTO) as Response;
             return getOtpData; 
         } catch (error: unknown) {
             const errorMsg = await catchError(error);

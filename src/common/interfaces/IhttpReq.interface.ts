@@ -1,4 +1,4 @@
 export interface IHttpReq {
-    getRequest: (url: string) => Promise<unknown>;
-    postRequest: (url: string, data: object) => Promise<unknown>;
+    getRequest: (url: string, headers: object) => Promise<unknown>;
+    postRequest: (url: string, headers: object, data: object) => Promise<unknown>;
 }

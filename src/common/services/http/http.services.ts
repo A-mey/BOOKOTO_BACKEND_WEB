@@ -3,9 +3,9 @@ import { catchError } from "../../utils/catch.util";
 import CommonHttpService from "./common.http.service";
 
 class HttpRequestService implements IHttpReq {
-    async getRequest(url: string): Promise<unknown> {
+    async getRequest(url: string, headers: object): Promise<unknown> {
         try {
-            const returnData = await CommonHttpService.httpRequest("get", url);
+            const returnData = await CommonHttpService.httpRequest("get", url, headers);
             return returnData;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
@@ -13,7 +13,7 @@ class HttpRequestService implements IHttpReq {
         }
     }
 
-    async postRequest(url: string, data: object): Promise<unknown> {
+    async postRequest(url: string, headers: object, data: object): Promise<unknown> {
         try {
             const returnData = await CommonHttpService.httpRequest("post", url, data);
             return returnData;

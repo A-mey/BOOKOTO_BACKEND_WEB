@@ -4,7 +4,7 @@ import { NullException } from "../../error/exceptions/null.exception.error";
 import { axiosErrorHandler } from "../../utils/axiosError.util";
 
 class CommonHttpService {
-    httpRequest = async(method: httpMethod, url: string, data?: object) : Promise<unknown> => {
+    httpRequest = async(method: httpMethod, url: string, headers?: object, data?: object) : Promise<unknown> => {
         let res: unknown;
         try {
             const config: AxiosRequestConfig = {

@@ -6,7 +6,7 @@ import { sessionContainer } from "../../session/session.container";
 import { ProductDaoFactory } from "../../daoFactory/product.dao.factory";
 import { ProductService } from "../../../product/services/product.service";
 import { RecentService } from "../../../recent/services/recent.service";
-import { RecentDAO } from "../../../recent/dao/recent.dao";
+import { RecentDAO } from "../../../recent/dao/recent.queue.dao";
 
 export const startupContainerService = (app: express.Application) : StartupRoutes => {
     const productDao = new ProductDaoFactory().getDao();

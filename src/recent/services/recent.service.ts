@@ -1,6 +1,6 @@
 import { catchError } from "../../common/utils/catch.util";
 import { UserProduct } from "../../product/types/user.product.type";
-import { IRecentDaoInterface } from "../interfaces/IRecent.dao.interface";
+import { IRecentDaoInterface } from "../interfaces/IRecent.queue.dao.interface";
 import { IRecentServiceInterface } from "../interfaces/IRecent.service.interface";
 
 export class RecentService implements IRecentServiceInterface {
