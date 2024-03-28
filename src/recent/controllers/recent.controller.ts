@@ -13,7 +13,7 @@ export class RecentController implements IRecentControllerInterface {
     addToRecentProductsList = async (req : express.Request, res : express.Response) => {
         try {
             await this.recentService.addProductToRecent;
-            res.json({});
+            res.status(200).json({success: true, code: 200, data: {message: "added to recent products"}});
         } catch (error: unknown) {
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
@@ -23,7 +23,7 @@ export class RecentController implements IRecentControllerInterface {
     getRecentProductsList = async (req : express.Request, res : express.Response) => {
         try {
             const recentProductsList = await this.recentService.getRecentProducts;
-            res.json({});
+            res.status(200).json({success: true, code: 200, data: {message: "recent product list fetched", data: recentProductsList}});
         } catch (error: unknown) {
             const response = responseTemplates.DEFAULT_ERROR;
             res.status(response.code).json(response);
