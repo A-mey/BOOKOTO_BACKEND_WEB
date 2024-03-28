@@ -13,19 +13,20 @@ export class RecentHttpDao implements IRecentHttpDaoInterface {
     }
 
     getRecentProductsDao = async (id : string) : Promise<Response> => {
-        const headers = {ID: id};
         const logger = await logFactoryService.getLog(this.logger, "getRecentProductsDao");
         try {
             const url: string = process.env.getOtpUrl!;
             if (!url) {
                 throw new NullException();
             }
+            const headers = {ID: id};
             const getOtpData = await HttpRequestService.getRequest(url, headers) as Response;
+            logger.info("getOtpData", getOtpData);
             return getOtpData;
         } catch (error: unknown) {
             const errorMsg = await catchError(error);
             logger.error("error", errorMsg);
             throw new Error(errorMsg.message);
-        } 
+        }
     };
 }

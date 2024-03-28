@@ -6,7 +6,7 @@ export class CartDAO implements IRecentDaoInterface {
     rabbitMQ: RabbitMQ;
 
     constructor () {
-        this.rabbitMQ = new RabbitMQ("recent");
+        this.rabbitMQ = new RabbitMQ("cart");
     }
 
     saveToRecentProductsDao = async (id: string) : Promise<void> => {
