@@ -3,7 +3,7 @@ class LoginSchema {
 
     constructor() { }
 
-    public readonly schema = {
+    readonly schema = {
         "otpotp" : {
             "type": "object",
             "additionalProperties": false,
