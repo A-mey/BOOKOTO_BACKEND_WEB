@@ -1,4 +1,4 @@
-import { catchError } from "../../common/utils/catch.util";
+import { Catch } from "../../common/utils/catch.util";
 import { ISessionServiceInterface } from "../../login/interfaces/ISession.service.interface";
 import { IProductServiceInterface } from "../../product/interfaces/IProduct.service.interface";
 import { Product } from "../../product/types/product.type";
@@ -20,7 +20,7 @@ export class StartupService implements IStartupServices {
         try {
             return await new UserFactory(sessionId).getUser();
         } catch (error) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             throw new Error(errorMsg);
         }
     };
@@ -33,7 +33,7 @@ export class StartupService implements IStartupServices {
         try {
             return await this.sessionService.createSession();
         } catch (error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             throw new Error(errorMsg);
         }
     };
@@ -43,7 +43,7 @@ export class StartupService implements IStartupServices {
             // TODO
             return true;
         } catch (error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             throw new Error(errorMsg);
         } 
     };
@@ -53,7 +53,7 @@ export class StartupService implements IStartupServices {
         try {
             products = await this.productService.getAllProducts(from, to);
         } catch (error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             console.log(errorMsg); 
         }
         return products;

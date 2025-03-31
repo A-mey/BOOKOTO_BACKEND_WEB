@@ -1,45 +1,45 @@
 import { CommonRoutesConfig } from "../../common/common.routes.config";
-import express from "express";
+import express, { Router } from "express";
 import { IBodyValidationMiddlewareInterface } from "../../common/interfaces/IBody.validation.middleware";
 import { ILoginControllerInterface } from "../interfaces/ILogin.controller.interface";
 
 export class LoginRoutes implements CommonRoutesConfig {
     private bodyValidationMiddleware: IBodyValidationMiddlewareInterface;
-    app: express.Application;
-    private name = "LoginRoutes";
-    loginController: ILoginControllerInterface;
+    private name = "LoginRoute";
+    private loginController: ILoginControllerInterface;
+    private router: Router;
     
-    constructor(app: express.Application, bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: ILoginControllerInterface) {
-        this.app = app;
-        this.bodyValidationMiddleware = bodyValidationMiddleware;
+    constructor(bodyValidationMiddleware: IBodyValidationMiddlewareInterface, loginController: ILoginControllerInterface) {
         this.loginController = loginController;
+        this.bodyValidationMiddleware = bodyValidationMiddleware;
+        this.router = express.Router();
         this.configureRoutes();
     }
     
     configureRoutes() {
 
-        this.app.use(this.bodyValidationMiddleware.checkSchema);
+        this.router.use(this.bodyValidationMiddleware.checkSchema);
 
-        this.app.route("/otp/otp")
+        this.router.route("/otp/otp")
             .post(
                 this.loginController.createOTP
             );
-        this.app.route("/otp/verification")
+        this.router.route("/otp/verification")
             .post(
                 this.loginController.validateOTP
             );
-        this.app.route("/login/registration")
+        this.router.route("/login/registration")
             .post(
                 this.loginController.registerUser
             );
-        this.app.route("/login/login")
+        this.router.route("/login/login")
             .post(
                 this.loginController.loginUser
             );
-        return this.app;
+        return this.router;
     }
 
-    getName(): string {
-        return this.name;
-    }
+    getName = (): string => this.name;
+
+    getRoutes = (): Router => this.router;
 }

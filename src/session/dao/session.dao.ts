@@ -2,9 +2,9 @@ import { NullException } from "../../common/error/exceptions/null.exception.erro
 import logFactoryService from "../../common/services/logger/log.factory.service";
 import { LogService } from "../../common/services/logger/log.service";
 import { Response } from "../../common/types/response.types";
-import { catchError } from "../../common/utils/catch.util";
+import { Catch } from "../../common/utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
-import HttpRequestService from "../../common/services/http/http.services";
+import HttpRequestService from "../../common/services/http/http.service";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
 import { GetSessionDTO } from "../dto/get.session.dto";
 import { AddSessionDTO } from "../dto/add.session.dto";
@@ -26,7 +26,7 @@ export class SessionDao implements ISessionDaoInterface {
             const getOtpData = await HttpRequestService.postRequest(url, validateSessionDTO) as Response;
             return getOtpData;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -42,7 +42,7 @@ export class SessionDao implements ISessionDaoInterface {
             const createSessionDaoResponse = await HttpRequestService.getRequest(url) as Response;
             return createSessionDaoResponse;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -58,7 +58,7 @@ export class SessionDao implements ISessionDaoInterface {
             const sessionDataResponse = await HttpRequestService.postRequest(url, getSessionDTO) as Response;
             return sessionDataResponse;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -74,7 +74,7 @@ export class SessionDao implements ISessionDaoInterface {
             const addSessionDaoResponse = await HttpRequestService.postRequest(url, addSessionDTO) as Response;
             return addSessionDaoResponse;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }

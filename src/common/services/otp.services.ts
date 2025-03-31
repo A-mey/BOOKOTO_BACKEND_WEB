@@ -3,7 +3,7 @@ import { EncryptionService } from './encryption.services';
 import { OtpObject } from '../types/otpObject.types';
 import { mailBody } from '../types/mailBody.types';
 import { randomNumberGenerator } from '../utils/random.util';
-import { catchError } from '../utils/catch.util';
+import { Catch } from '../utils/catch.util';
 
 const key: string = 'MySecretKey';
 
@@ -19,7 +19,7 @@ export class OtpService {
             }
             return otpObj;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            throw new Error(Catch(error));
         }
         
     }

@@ -16,6 +16,8 @@
   "author": "ameya",
   "license": "ISC",
   "dependencies": {
+    "@grpc/grpc-js": "^1.13.2",
+    "@grpc/proto-loader": "^0.7.13",
     "@types/cookie-parser": "^1.4.6",
     "@types/node": "^18.11.11",
     "@types/nodemon": "^1.19.2",

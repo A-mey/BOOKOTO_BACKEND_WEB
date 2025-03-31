@@ -1,4 +1,5 @@
-import { catchError } from "../../common/utils/catch.util";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Catch } from "../../common/utils/catch.util";
 import { LogService } from "../../common/services/logger/log.service";
 import logFactoryService from "../../common/services/logger/log.factory.service";
 import { Response } from "../../common/types/response.types";
@@ -10,14 +11,17 @@ import { RegisterUserDTO } from "../dto/register.user.dto";
 import { LoginUserDTO } from "../dto/login.user.dto";
 import { ISessionServiceInterface } from "../interfaces/ISession.service.interface";
 import { NullException } from "../../common/error/exceptions/null.exception.error";
+import LoginGrpcDao from "../dao/login.grpc.dao";
 
-export class LoginService implements ILoginServiceInterface {
+export default class LoginService implements ILoginServiceInterface {
     loginDao: ILoginDaoInterface;
     logger: LogService;
     sessionService: ISessionServiceInterface;
+    loginGrpcDao: LoginGrpcDao;
 
-    constructor(loginDao: ILoginDaoInterface, sessionService: ISessionServiceInterface) {
+    constructor(loginDao: ILoginDaoInterface, loginGrpcDao: LoginGrpcDao, sessionService: ISessionServiceInterface) {
         this.loginDao = loginDao;
+        this.loginGrpcDao = loginGrpcDao;
         this.sessionService = sessionService;
         this.logger = new LogService("LoginController");
     }
@@ -29,7 +33,7 @@ export class LoginService implements ILoginServiceInterface {
             logger.log("checkAuthResponse", checkAuthResponse);
             return checkAuthResponse;
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -42,7 +46,7 @@ export class LoginService implements ILoginServiceInterface {
             logger.log("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -55,7 +59,7 @@ export class LoginService implements ILoginServiceInterface {
             logger.log("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -68,23 +72,25 @@ export class LoginService implements ILoginServiceInterface {
             logger.log("otpValidationResponse", otpValidationResponse);
             return otpValidationResponse;
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
     };
 
-    addUserDataToSessionService = async (userData: object, sessionId: string) : Promise<void> => {
-        const logger = await logFactoryService.getLog(this.logger, "addUserDataToSessionService");
+    addUserDataToSessionService = async (_userData: object, _sessionId: string) : Promise<void> => {
+        // const logger = await logFactoryService.getLog(this.logger, "addUserDataToSessionService");
         try {
-            if (!userData) {
-                throw new NullException();
-            }
-            const dataToInsert = {SESSION_ID: sessionId, DATA: userData, SET: "SESSION"};
-            await this.sessionService.addSession(dataToInsert);
+            // if (!userData) {
+            //     throw new NullException();
+            // }
+            // const dataToInsert = {SESSION_ID: sessionId, DATA: userData, SET: "SESSION"};
+            // await this.sessionService.addSession(dataToInsert);
+            const x = await this.loginGrpcDao.loginUser("amey2p@gmail.com", "Pass@1234");
+            console.log(x);
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
-            logger.log("error", errorMsg);
+            const errorMsg = Catch(error);
+            // logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
     };

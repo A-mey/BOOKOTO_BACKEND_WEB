@@ -1,5 +1,5 @@
 import { isAxiosError } from "axios";
-import { catchError } from "./catch.util";
+import { Catch } from "./catch.util";
 
 export const axiosErrorHandler = async (error: unknown) => {
     let errorMessage: string;
@@ -7,7 +7,7 @@ export const axiosErrorHandler = async (error: unknown) => {
         console.log("error", error.response?.data || error.message);
         errorMessage = error.response?.data || error.message;
     } else {
-        errorMessage = await catchError(error);
+        errorMessage = Catch(error);
     }
     return errorMessage;
 }

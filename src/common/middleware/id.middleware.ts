@@ -1,5 +1,5 @@
 import express, { NextFunction } from "express";
-import { catchError } from "../utils/catch.util";
+import { Catch } from "../utils/catch.util";
 import { RequestIdService } from "../services/requestId/requestId.service";
 import { IIdMiddleWareInterface } from "../interfaces/IId.middlewar.interface";
 
@@ -16,7 +16,7 @@ export class IdMiddleware implements IIdMiddleWareInterface{
             await this.requestIdService.setRequestId(sessionId);
             next();
         } catch(error: unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             console.log("IdClass:createRequestId::error", errorMsg);
         }  
     };

@@ -2,7 +2,7 @@ import { ISessionServiceInterface } from "../interfaces/ISession.service.interfa
 import logFactoryService from "../../common/services/logger/log.factory.service";
 // import logFactoryService from "../../services/logger/log.factory.service";
 import { LogService } from "../../common/services/logger/log.service";
-import { catchError } from "../../common/utils/catch.util";
+import { Catch } from "../../common/utils/catch.util";
 import { ISessionDaoInterface } from "../interfaces/ISession.dao.interface";
 import { ValidateSessionDTO } from "../dto/validate.session.dto";
 import { GetSessionDTO } from "../dto/get.session.dto";
@@ -26,7 +26,7 @@ export class SessionService implements ISessionServiceInterface {
             const isSessionValid = isSessionValidResponse.data.data as unknown as boolean;
             return isSessionValid;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -39,7 +39,7 @@ export class SessionService implements ISessionServiceInterface {
             const sessionId = sessionDetails.data.data as unknown as {SESSION_ID: string};
             return sessionId;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -53,7 +53,7 @@ export class SessionService implements ISessionServiceInterface {
             const sessionData = sessionDataResponse.data.data as {SESSION_ID: string; DATA: object;};
             return sessionData;
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }
@@ -67,7 +67,7 @@ export class SessionService implements ISessionServiceInterface {
                 throw new Error("Something went wrong");
             }
         } catch (error : unknown) {
-            const errorMsg = await catchError(error);
+            const errorMsg = Catch(error);
             logger.log("error", errorMsg);
             throw new Error(errorMsg);
         }

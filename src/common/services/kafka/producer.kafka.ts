@@ -1,4 +1,4 @@
-import { catchError } from '../../utils/catch.util';
+import { Catch } from '../../utils/catch.util';
 import { KafkaJSClass } from './config.kakfa';
 
 export class KafkaProducer extends KafkaJSClass {
@@ -16,7 +16,7 @@ export class KafkaProducer extends KafkaJSClass {
             console.log("producer connected")
         }
         catch(e: unknown) {
-            console.log(await catchError(e));
+            console.log(Catch(e));
         }
     }
 

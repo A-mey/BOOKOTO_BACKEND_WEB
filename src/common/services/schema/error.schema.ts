@@ -1,5 +1,5 @@
 import { ErrorObject } from "ajv";
-import { catchError } from "../../utils/catch.util";
+import { Catch } from "../../utils/catch.util";
 
 class SchemaError {
     constructor() {}
@@ -25,7 +25,7 @@ class SchemaError {
             }
         }
         catch(e) {
-            console.log(await catchError(e));
+            console.log(Catch(e));
             err = "Unknown error"
         }
         return err;

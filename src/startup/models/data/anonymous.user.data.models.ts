@@ -1,4 +1,4 @@
-import { catchError } from "../../../common/utils/catch.util";
+import { Catch } from "../../../common/utils/catch.util";
 import { User } from "./user.data.models";
 import { IUserInterface } from "../../interfaces/IUser.interface";
 
@@ -16,7 +16,7 @@ export class AnonymousUser extends User implements IUserInterface{
             const sessionData = await this.sessionService.getSessionData(this.sessionId);
             return sessionData;
         } catch (error: unknown) {
-            throw new Error(await catchError(error));
+            throw new Error(Catch(error));
         }
     };
 }

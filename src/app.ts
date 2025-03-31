@@ -2,10 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import Dependency from "./common/dependency/dependency";
+import { Catch } from "./common/utils/catch.util";
 
 const environment = process.env.DEPLOY_STAGE;
 
-const dotenvResult = environment ? dotenv.config({ path: `.env.${environment} ` }) : dotenv.config({ path: `.env` })
+const dotenvResult = environment ? dotenv.config({ path: `.env.${environment}` }) : dotenv.config({ path: ".env" });
 if (dotenvResult.error) {
     throw dotenvResult.error;
 }
@@ -23,6 +24,7 @@ app.listen(port, async () => {
         new Dependency(app).getRoutes();
         console.log(`app is running on port ${port} on environment ${environment || "none"}`);
     } catch (error) {
+        console.log(Catch(error));
         process.exit(1);
     }
 });

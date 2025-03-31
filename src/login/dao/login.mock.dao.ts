@@ -35,6 +35,4 @@ export class LoginMockDao implements ILoginDaoInterface {
             return {success: false, code: 400, data: {message: "Registration failed"}};
         }
     };
-
-
 }

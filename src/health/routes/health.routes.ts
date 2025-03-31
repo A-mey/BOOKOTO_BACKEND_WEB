@@ -1,0 +1,26 @@
+import express, { Router } from "express";
+import { HealthController } from "../controllers/health.controller";
+import RoutesInterface from "../../common/interfaces/IRoutes.interface";
+
+export class HealthRoute implements RoutesInterface {
+    private name = "ProductRoute";
+    private healthController: HealthController;
+    router: Router;
+
+    constructor (healthController : HealthController) {
+        this.healthController = healthController;
+        this.router = express.Router();
+        this.configureRoutes();
+    }
+
+    configureRoutes () {
+        this.router.route("/")
+            .get(this.healthController.checkHealth);
+
+        return this.router;
+    }
+
+    getName () : string {
+        return this.name;
+    }
+}

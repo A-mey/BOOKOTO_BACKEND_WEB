@@ -3,9 +3,8 @@ import { httpMethod } from "../../types/httpMethods.type";
 import { NullException } from "../../error/exceptions/null.exception.error";
 import { axiosErrorHandler } from "../../utils/axiosError.util";
 
-class CommonHttpService {
-    httpRequest = async(method: httpMethod, url: string, data?: object) : Promise<unknown> => {
-        let res: unknown;
+export default class CommonHttpService {
+    static httpRequest = async<T>(method: httpMethod, url: string, data?: object) : Promise<AxiosResponse<T>> => {
         try {
             const config: AxiosRequestConfig = {
                 method: method,
@@ -15,18 +14,14 @@ class CommonHttpService {
                     "Content-Type": "application/json"
                 }
             };
-            const httpResponse: AxiosResponse = await axios(config);
+            const httpResponse: AxiosResponse = await axios(config) as AxiosResponse<T>;
             if (!httpResponse) {
                 throw new NullException();
             }
-            res = httpResponse;
             console.log(httpResponse.data);
-            res = httpResponse.data;
+            return httpResponse;
         } catch(error: unknown) {
             throw new Error(await axiosErrorHandler(error));
         }
-        return res;
     };
 }
-
-export default new CommonHttpService();

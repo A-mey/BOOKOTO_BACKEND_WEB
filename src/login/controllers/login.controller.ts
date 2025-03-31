@@ -1,7 +1,7 @@
 import express from "express";
 
 import { Response } from "../../common/types/response.types";
-import { catchError } from "../../common/utils/catch.util";
+import { Catch } from "../../common/utils/catch.util";
 import responseTemplates from "../../common/constants/response.template.constants";
 import { LogService } from "../../common/services/logger/log.service";
 import logFactoryService from "../../common/services/logger/log.factory.service";
@@ -29,7 +29,7 @@ export class LoginController implements ILoginControllerInterface {
             logger.log("createOTPServiceResponse", createOTPServiceResponse);
             res.status(createOTPServiceResponse.code).json(createOTPServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.log("error", Catch(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -42,7 +42,7 @@ export class LoginController implements ILoginControllerInterface {
             logger.log("validateOTPServiceResponse", validateOTPServiceResponse);
             res.status(validateOTPServiceResponse.code).json(validateOTPServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.log("error", Catch(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -55,7 +55,7 @@ export class LoginController implements ILoginControllerInterface {
             logger.log("registerUserServiceResponse", registerUserServiceResponse);
             res.status(registerUserServiceResponse.code).json(registerUserServiceResponse);
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.log("error", Catch(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
@@ -74,7 +74,7 @@ export class LoginController implements ILoginControllerInterface {
                 res.status(500).json(responseTemplates.DEFAULT_ERROR);
             }
         } catch (error: unknown) {
-            logger.log("error", await catchError(error));
+            logger.log("error", Catch(error));
             res.status(500).json(responseTemplates.DEFAULT_ERROR);
         }
     };
